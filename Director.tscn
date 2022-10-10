@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Director.gd" type="Script" id=1]
+[ext_resource path="res://ink-files/MainStory.ink" type="Resource" id=2]
+[ext_resource path="res://addons/paulloz.ink/InkPlayer.cs" type="Script" id=3]
+
+[node name="Director" type="Node"]
+script = ExtResource( 1 )
+
+[node name="InkPlayer" type="Node" parent="."]
+script = ExtResource( 3 )
+autoLoadStory = true
+story = ExtResource( 2 )

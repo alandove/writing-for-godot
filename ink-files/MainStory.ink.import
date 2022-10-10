@@ -1,0 +1,15 @@
+[remap]
+
+importer="ink"
+type="Resource"
+path="res://.import/MainStory.ink-ccbc231cddd9b647faff142c128b58dd.res"
+
+[deps]
+
+source_file="res://ink-files/MainStory.ink"
+dest_files=[ "res://.import/MainStory.ink-ccbc231cddd9b647faff142c128b58dd.res" ]
+
+[params]
+
+is_master_file=true
+compress=true

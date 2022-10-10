@@ -1,0 +1,2 @@
+﻿37189
+/home/alan/Godot35/Godot_v3.5-stable_mono_x11.64
