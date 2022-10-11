@@ -1,0 +1,24 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://UserInterface/arrow.png" type="Texture" id=1]
+
+[node name="BlinkingArrow" type="Control"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -40.0
+margin_top = -40.0
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -12.5
+margin_top = -13.5
+margin_right = 12.5
+margin_bottom = 13.5
+texture = ExtResource( 1 )
+expand = true
+stretch_mode = 5
