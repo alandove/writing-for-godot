@@ -15,14 +15,15 @@ func _ready() -> void:
 	story.connect("InkContinued", self, "_on_story_continued")
 	# warning-ignore:return_value_discarded
 	story.connect("InkChoices", self, "_on_choices")
+	story.Continue()
 
 # The timer paces the display of text, and keeps signals from stepping on each other.
-	add_child(timer)
-	timer.autostart = true
-	timer.wait_time = 0.1
-# warning-ignore:return_value_discarded
-	timer.connect("timeout", story, "Continue")
-	timer.start()
+#	add_child(timer)
+#	timer.autostart = true
+#	timer.wait_time = 0.1
+## warning-ignore:return_value_discarded
+#	timer.connect("timeout", story, "Continue")
+#	timer.start()
 
 func _on_story_continued(text, tags) -> void:
 	print(tags)
@@ -35,13 +36,14 @@ func _on_story_continued(text, tags) -> void:
 			var bg: Background = ResourceDB.get_background(tag_array[1])
 			_background.texture = bg.texture
 			
-	# TODO: We'll also need to figure out how to get individual lines to display one at a time. Ink seems to feed them one at a time, but they rush past.
+	# TODO: We'll also need to figure out how to get individual lines to display one at a time. Ink seems to feed them one at a time, but they rush past and the yield() below doesn't seem to wait.
 	# Experimenting with splitting the lines into an array, but each array only has one line.
 	var text_array = text.split("\n", true, 0)
 	print(text_array)
 	_textbox.show()
 	_textbox.display(text, "Sophia")
 	yield(_textbox, "next_requested")
+	story.Continue()
 
 func _on_choices(choices) -> void:
 	for choice in choices:
