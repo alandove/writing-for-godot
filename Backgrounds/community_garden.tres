@@ -1,0 +1,10 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://Backgrounds/Background.gd" type="Script" id=1]
+[ext_resource path="res://Backgrounds/community_garden.jpg" type="Texture" id=2]
+
+[resource]
+script = ExtResource( 1 )
+id = "community_garden"
+display_name = "Community garden"
+texture = ExtResource( 2 )

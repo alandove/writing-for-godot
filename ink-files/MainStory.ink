@@ -1,6 +1,6 @@
 VAR score = 0
 
-# background industrial_building
+# background community_garden
 
 This is some text that should appear in the text box initially, just to make sure it's working.
 

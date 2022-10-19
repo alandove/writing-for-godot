@@ -69,6 +69,7 @@ func _enter(from_side: String, sprite: Sprite) -> void:
 	_tween.interpolate_property(
 	sprite, "modulate", COLOR_WHITE_TRANSPARENT, Color.white, 0.25
 	)
+# warning-ignore:return_value_discarded
 	_tween.start()
 	# Set starting properties manually so we don't get visual glitches if the player is spamming the "Enter" key.
 	sprite.position = start
