@@ -1,17 +1,19 @@
 VAR score = 0
 
 # background community_garden
-
+# tagtest second tag group
 This is some text that should appear in the text box initially, just to make sure it's working.
+Now it is two lines long.
+Now it is three lines long, but only the last line will print. Why?
 
 * [Start]
 -> intro
 
 === intro ===
-# sophia enter left
+# show sophia left
 Well, this looks like the right place. Now I just need to find a terminal.
 
-# dani flip enter right
+# show dani flip right
 Hey, Sophia! What are you doing down here?
 
 # sophia 

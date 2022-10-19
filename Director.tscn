@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Director.gd" type="Script" id=1]
 [ext_resource path="res://ink-files/MainStory.ink" type="Resource" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://Theme/theme.tres" type="Theme" id=7]
 [ext_resource path="res://TextBox.gd" type="Script" id=8]
 [ext_resource path="res://Characters/CharacterDisplayer.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Backgrounds/industrial_building.jpg" type="Texture" id=10]
 
 [sub_resource type="Animation" id=1]
 resource_name = "fade_in"
@@ -197,6 +198,12 @@ script = ExtResource( 1 )
 script = ExtResource( 3 )
 autoLoadStory = true
 story = ExtResource( 2 )
+
+[node name="Background" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 10 )
+expand = true
 
 [node name="CharacterDisplayer" parent="." instance=ExtResource( 9 )]
 
