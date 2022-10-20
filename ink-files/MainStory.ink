@@ -4,7 +4,7 @@ VAR score = 0
 # tagtest second tag group
 This is some text that should appear in the text box initially, just to make sure it's working.
 Now it is two lines long.
-Now it is three lines long, but only the last line will print. Why?
+Now it is three lines long, and I've finally fixed the system so it will feed one line at a time. This one is longer than the others, though.
 
 * [Start]
 -> intro
