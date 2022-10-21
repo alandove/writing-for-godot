@@ -296,14 +296,14 @@ margin_top = -23.5
 margin_right = 349.0
 margin_bottom = 55.5
 bbcode_enabled = true
-bbcode_text = "Hi, I'm Sophia. What's your name?"
+bbcode_text = "Hi, I'm Sophia. Who are you?"
 meta_underlined = false
-text = "Hi, I'm Sophia. What's your name?"
+text = "Hi, I'm Sophia. Who are you?"
 scroll_active = false
 
 [node name="BlinkingArrow" parent="TextBox/TextLabel" instance=ExtResource( 5 )]
-margin_right = -2.0
-margin_bottom = -1.0
+margin_left = -38.0
+margin_top = -39.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="TextBox"]
 anims/fade_in = SubResource( 1 )

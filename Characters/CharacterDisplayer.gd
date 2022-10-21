@@ -35,6 +35,7 @@ func display(character: Character, side: String = SIDE.LEFT, expression := "", a
 	assert(side in SIDE.values())
 	
 	# Figure out whether we're modifying the left or right sprite. Start by picking a node based on the side value passed to us.
+	# The right sprite is set to "Flip H" in the node settings, so it'll automatically show up flipped. Use set_flip_h to change that in code.
 	var sprite: Sprite = _left_sprite if side == SIDE.LEFT else _right_sprite
 	# Next, we see if this character is already displayed, and if so on which side, so we can continue using the corresponding sprite.
 	if character == _displayed.left:
