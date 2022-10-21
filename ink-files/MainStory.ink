@@ -1,7 +1,7 @@
 VAR score = 0
 
 # background community_garden
-# tagtest second tag group
+# show sophia enter left
 This is some text that should appear in the text box initially, just to make sure it's working.
 Now it is two lines long.
 Now it is three lines long, and I've finally fixed the system so it will feed one line at a time. This one is longer than the others, though.
@@ -10,10 +10,10 @@ Now it is three lines long, and I've finally fixed the system so it will feed on
 -> intro
 
 === intro ===
-# show sophia left
+# show sophia enter left
 Well, this looks like the right place. Now I just need to find a terminal.
 
-# show dani flip right
+# show dani enter right flip
 Hey, Sophia! What are you doing down here?
 
 # sophia 

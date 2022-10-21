@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Director.gd" type="Script" id=1]
 [ext_resource path="res://ink-files/MainStory.ink" type="Resource" id=2]
@@ -191,6 +191,54 @@ tracks/4/keys = {
 "values": [ 338.0 ]
 }
 
+[sub_resource type="Animation" id=4]
+resource_name = "fade_in"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/path = NodePath("Scrim:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.7 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "fade_out"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/path = NodePath("Scrim:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.7 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "setup"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/path = NodePath("Scrim:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+
 [node name="Director" type="Node"]
 script = ExtResource( 1 )
 
@@ -263,3 +311,14 @@ anims/fade_out = SubResource( 2 )
 anims/setup = SubResource( 3 )
 
 [node name="Tween" type="Tween" parent="TextBox"]
+
+[node name="Scrim" type="ColorRect" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 1 )
+
+[node name="FadeAnimationPlayer" type="AnimationPlayer" parent="."]
+anims/fade_in = SubResource( 4 )
+anims/fade_out = SubResource( 5 )
+anims/setup = SubResource( 6 )

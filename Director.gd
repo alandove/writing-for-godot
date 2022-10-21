@@ -56,3 +56,14 @@ func background(arguments) -> void:
 	# TODO: Add some input checking and include more possible arguments.
 	var bg: Background = ResourceDB.get_background(arguments[1])
 	_background.texture = bg.texture
+
+func show(arguments) -> void:
+	# TODO: Add input checking and include more possible arguments.
+	var character: Character = (
+		ResourceDB.get_character(arguments[1])
+	)
+	var animation: String = arguments[2]
+	var side: String = arguments[3]
+	print(character, animation, side)
+	_character_displayer.display(character, side, "", animation)
+	
