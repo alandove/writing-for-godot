@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Director.gd" type="Script" id=1]
 [ext_resource path="res://ink-files/MainStory.ink" type="Resource" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://TextBox.gd" type="Script" id=8]
 [ext_resource path="res://Characters/CharacterDisplayer.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Backgrounds/industrial_building.jpg" type="Texture" id=10]
+[ext_resource path="res://ChoiceSelector.tscn" type="PackedScene" id=11]
 
 [sub_resource type="Animation" id=1]
 resource_name = "fade_in"
@@ -260,6 +261,7 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = -140.0
+mouse_filter = 0
 theme = ExtResource( 7 )
 texture = ExtResource( 4 )
 expand = true
@@ -282,6 +284,7 @@ margin_left = -150.0
 margin_top = -42.5
 margin_right = 150.0
 margin_bottom = 28.5
+mouse_filter = 1
 text = "Sophia"
 align = 1
 valign = 1
@@ -295,6 +298,7 @@ margin_left = -349.0
 margin_top = -23.5
 margin_right = 349.0
 margin_bottom = 55.5
+mouse_filter = 1
 bbcode_enabled = true
 bbcode_text = "Hi, I'm Sophia. Who are you?"
 meta_underlined = false
@@ -304,8 +308,16 @@ scroll_active = false
 [node name="BlinkingArrow" parent="TextBox/TextLabel" instance=ExtResource( 5 )]
 margin_left = -38.0
 margin_top = -39.0
+mouse_filter = 1
+
+[node name="ChoiceSelector" parent="TextBox" instance=ExtResource( 11 )]
+margin_left = 312.0
+margin_top = 20.0
+margin_right = -267.0
+margin_bottom = -20.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="TextBox"]
+autoplay = "setup"
 anims/fade_in = SubResource( 1 )
 anims/fade_out = SubResource( 2 )
 anims/setup = SubResource( 3 )
@@ -316,6 +328,7 @@ anims/setup = SubResource( 3 )
 modulate = Color( 1, 1, 1, 0 )
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 1
 color = Color( 0, 0, 0, 1 )
 
 [node name="FadeAnimationPlayer" type="AnimationPlayer" parent="."]

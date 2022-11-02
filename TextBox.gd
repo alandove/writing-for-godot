@@ -6,6 +6,7 @@ extends Control
 ## The Director will catch this signal and use it to step to the next line, animation, or other event.
 signal next_requested
 signal display_finished
+signal choice_made(target_id)
 
 ## Speed of the text display
 export var display_speed := 20.0
@@ -14,8 +15,10 @@ export var display_speed := 20.0
 export var bbcode_text := "" setget set_bbcode_text
 
 # References to the nodes that will display text and handle player input.
+onready var _choice_selector: ChoiceSelector = $ChoiceSelector
 onready var _text_label: RichTextLabel = $TextLabel
 onready var _name_label: Label = $NameBackground/NameLabel
+onready var _name_background: TextureRect = $NameBackground
 onready var _blinking_arrow: Control = $TextLabel/BlinkingArrow
 onready var _tween: Tween = $Tween
 onready var _anim_player: AnimationPlayer = $AnimationPlayer
@@ -24,7 +27,6 @@ onready var _anim_player: AnimationPlayer = $AnimationPlayer
 func _ready() -> void:
 	hide()
 	_blinking_arrow.hide()
-	
 	_name_label.text = ""
 	_text_label.bbcode_text = ""
 	_text_label.visible_characters = 0
@@ -33,6 +35,32 @@ func _ready() -> void:
 # warning-ignore:return_value_discarded
 	_tween.connect("tween_all_completed", self, "_on_Tween_tween_all_completed")
 	
+	## The text box forwards the `choice_made` signal to the Director via a signal.
+# warning-ignore:return_value_discarded
+	_choice_selector.connect("choice_made", self, "_on_ChoiceSelector_choice_made")
+
+# The works, but keeps reading the left mouse button every frame until it's released, so all text until the next choice flashes past.
+#func _process(_delta: float) -> void:
+#	if (Input.is_mouse_button_pressed(BUTTON_LEFT)):
+#		if _blinking_arrow.visible:
+#			emit_signal("next_requested")
+#		else:
+#			_tween.seek(INF)
+
+# The choices are a child of the text box, so we have to hide nodes manually. The Director can call this method to display choices.
+func display_choices(choices:Array) -> void:
+	_name_background.hide()
+	_text_label.hide()
+	_blinking_arrow.hide()
+	
+	_choice_selector.display(choices)
+
+# When the player makes a choice, we forward the signal to the Director so it can respond accordingly, and we reset visibility.
+func _on_ChoiceSelector_choice_made(target_id) -> void:
+	emit_signal("choice_made", target_id)
+	_name_background.show()
+	_text_label.show()
+
 func display(text: String, character_name :="", speed := display_speed) -> void:
 	set_bbcode_text(text)
 	

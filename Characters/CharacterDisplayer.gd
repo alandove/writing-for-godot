@@ -5,6 +5,7 @@ extends Node
 ## Emitted when the characters finish displaying or finish their animation
 signal display_finished
 
+
 ## Define a constant to select a valid side to display the characters. It maps to the keys of our _displayed variable below.
 const SIDE := {LEFT = "left", RIGHT = "right"}
 ## Use this color to animate characters fading in and out.

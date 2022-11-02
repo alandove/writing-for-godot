@@ -35,24 +35,14 @@ func _on_story_continued(text, tags) -> void:
 	story.Continue()
 
 func _on_choices(choices) -> void:
+	# Print choices in the console for debugging.
 	for choice in choices:
 		print(choice)
-		story.ChooseChoiceIndex(0)
-
-# This is the general idea for iterating through the choices and putting up buttons for them. I'll need to make a ChoiceSelector node and put `onready var _choice_selector := $ChoiceSelector` above first.
-#		var choice_index := 0
-#		var button := Button.new()
-#		button.text = choice
-#		choice_index = choices.find(choice,0)
-#		_choice_selector.add_child(button)
-#		button.connect("pressed", self, "_on_Button_pressed", [choice_index])
-#	(_choice_selector.get_child(0) as Button).grab_focus()
-
-#func _on_Button_pressed(target_id) -> void:
-#	story.ChooseChoiceIndex(target_id)
-#	for child in _choice_selector.get_children():
-#		child.queue_free()
-#	story.Continue()
+	# Display choices in the TextBox, wait for user input, and continue the story based on that.
+	_textbox.display_choices(choices)
+	var chosen = yield(_textbox, "choice_made")
+	print(chosen)
+	story.ChooseChoiceIndexAndContinue(chosen)
 
 func background(arguments) -> void:
 	# TODO: Add some input checking and include more possible arguments.
