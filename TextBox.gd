@@ -95,7 +95,7 @@ func _on_Tween_tween_all_completed() -> void:
 	# Once all the text is visible, show the arrow to indicate we can move to the next line.
 	_blinking_arrow.show()
 
-func _unhandled_input(event: InputEvent) -> void:
+func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_accept"):
 		if _blinking_arrow.visible:
 			emit_signal("next_requested")
