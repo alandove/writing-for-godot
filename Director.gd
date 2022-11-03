@@ -5,6 +5,12 @@ onready var _textbox := $TextBox
 onready var _character_displayer := $CharacterDisplayer
 onready var _background := $Background
 var character_name: String
+var timer := Timer.new()
+
+## Emitted when a transition, such as a fade in or fade out of the whole scene, ends. This lets the node wait for its animations to finish before triggering other events.
+signal transition_finished
+
+onready var _anim_player: AnimationPlayer = $FadeAnimationPlayer
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -12,6 +18,15 @@ func _ready() -> void:
 	story.connect("InkContinued", self, "_on_story_continued")
 	# warning-ignore:return_value_discarded
 	story.connect("InkChoices", self, "_on_choices")
+	
+#	# The timer should pace the display of text and keep signals from stepping on each other. Not sure it's doing much good.
+#	add_child(timer)
+#	timer.one_shot = true
+#	timer.wait_time = 0.1
+## warning-ignore:return_value_discarded
+#	timer.connect("timeout", story, "Continue")
+#	timer.start()
+	
 	story.Continue()
 
 func _on_story_continued(text, tags) -> void:
@@ -25,24 +40,44 @@ func _on_story_continued(text, tags) -> void:
 		# If the first element in the resulting array matches a function in this script, we call that function and send the array as an argument.
 		if self.has_method(tag_array[0]):
 			self.call(tag_array[0], tag_array)
+			# Attempting to get fade_out followed by fade_in to work.
+			if _anim_player.is_playing():
+				yield(self, "transition_finished")
 		elif tag_array.size() == 1:
 			character_name = tag_array[0]
-		
+
+	if _anim_player.is_playing():
+		yield(self, "transition_finished")
 	# Now we'll display the text in the textbox, wait for the display to finish, then continue to the next line.
 	_textbox.show()
-	_textbox.display(text, character_name) # TODO: pass a character name in here.
+	_textbox.display(text, character_name)
 	yield(_textbox, "next_requested")
+#	timer.start()
 	story.Continue()
 
 func _on_choices(choices) -> void:
+	yield(_textbox, "next_requested")
 	# Print choices in the console for debugging.
-	for choice in choices:
-		print(choice)
+#	for choice in choices:
+#		print(choice)
 	# Display choices in the TextBox, wait for user input, and continue the story based on that.
 	_textbox.display_choices(choices)
 	var chosen = yield(_textbox, "choice_made")
-	print(chosen)
 	story.ChooseChoiceIndexAndContinue(chosen)
+#	timer.start()
+
+# Functions and `yield` will play animations in sequence.
+func fade_in(_args) -> void:
+	_anim_player.play("fade_in")
+	yield(_anim_player, "animation_finished")
+	yield(_textbox.fade_in_async(), "completed")
+	emit_signal("transition_finished")
+
+func fade_out(_args) -> void:
+	yield(_textbox.fade_out_async(), "completed")
+	_anim_player.play("fade_out")
+	yield(_anim_player, "animation_finished")
+	emit_signal("transition_finished")
 
 func background(arguments) -> void:
 	# TODO: Add some input checking and include more possible arguments.
@@ -65,4 +100,3 @@ func show(arguments) -> void:
 	
 	# Now let's put it all together and ship it out to the CharacterDisplayer.
 	_character_displayer.display(character, side, expression, animation)
-	

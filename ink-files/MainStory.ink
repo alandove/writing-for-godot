@@ -10,8 +10,8 @@ A tag whose first word doesn't match a function, but which is a single string lo
 
  ----------------------------------*/
 
-
 # background community_garden
+# fade_in
 # show sophia happy enter left
 
 # Sophia
@@ -22,19 +22,21 @@ Now it is two lines long.
 
 # Dani
 Now the text is three lines long, and I've finally fixed the system so it will feed one line at a time.
+And here's another line that might get eaten.
 
 * [Start]
+//# fade_out
 -> intro
 
 === intro ===
 # background industrial_building
+# fade_in
 # show sophia neutral enter left
 
 # Sophia
 Well, this looks like the right place. Now I just need to find a terminal.
 
 # show dani neutral enter right
-
 # Dani
 Hey, Sophia! What are you doing down here?
 
@@ -46,7 +48,6 @@ Our system?
 
 # Sophia 
 Yeah, the system that displays us on the screen, draws our backgrounds, and generally turns our world into a playable game.
-
 Like the way each sentence I say comes out as a separate line in that text box at the bottom. Or the way we get choices.
 
 * [Like] 
@@ -71,5 +72,6 @@ And just for asking about it, you earned us some points. See? Our score is now {
 
 # Dani 
 Wow, that was easy. 
+# fade_out
 
     -> END

@@ -52,7 +52,6 @@ func display_choices(choices:Array) -> void:
 	_name_background.hide()
 	_text_label.hide()
 	_blinking_arrow.hide()
-	
 	_choice_selector.display(choices)
 
 # When the player makes a choice, we forward the signal to the Director so it can respond accordingly, and we reset visibility.

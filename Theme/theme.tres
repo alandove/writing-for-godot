@@ -16,7 +16,7 @@ corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
-[sub_resource type="StyleBoxEmpty" id=6]
+[sub_resource type="StyleBoxFlat" id=8]
 
 [sub_resource type="StyleBoxEmpty" id=7]
 
@@ -32,6 +32,6 @@ Button/colors/font_color_pressed = Color( 1, 1, 1, 1 )
 Button/constants/hseparation = 2
 Button/styles/disabled = SubResource( 1 )
 Button/styles/focus = SubResource( 2 )
-Button/styles/hover = SubResource( 6 )
+Button/styles/hover = SubResource( 8 )
 Button/styles/normal = SubResource( 7 )
 Button/styles/pressed = SubResource( 5 )

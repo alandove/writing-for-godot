@@ -15,13 +15,10 @@ func display(choices: Array) -> void:
 		add_child(button)
 # warning-ignore:return_value_discarded
 		button.connect("pressed", self, "_on_Button_pressed", [choice_index])
-	(get_child(0) as Button).grab_focus()
+#	(get_child(0) as Button).grab_focus() # Commenting this out fixes the spacebar bug, but then there's no way to pick choices from the keyboard.
 
 # When the player clicks on a choice, send the `choice_made` signal and the index of the choice they made.
 func _on_Button_pressed(target_id) -> void:
 	emit_signal("choice_made", target_id)
 	for child in get_children():
 		child.queue_free()
-
-#	story.ChooseChoiceIndex(target_id)
-#	story.Continue()
