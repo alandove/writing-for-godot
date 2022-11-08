@@ -18,6 +18,9 @@ var _displayed := {left = null, right = null}
 onready var _tween: Tween = $Tween
 onready var _left_sprite: Sprite = $Left
 onready var _right_sprite: Sprite = $Right
+# Set default sprite positions based on how they start.
+onready var _default_left: Vector2 = _left_sprite.position
+onready var _default_right: Vector2 = _right_sprite.position
 
 func _ready() -> void:
 	# Hide both sprites to avoid showing portraits at the start.
@@ -57,6 +60,8 @@ func display(character: Character, expression := "", animation := "", side: Stri
 
 ## Fade in and move the character to the anchor position.
 func _enter(from_side: String, sprite: Sprite) -> void:
+	# Set default position initially so re-entry doesn't yield a sprite stuck halfway off the screen.
+	sprite.position = _default_left if from_side == SIDE.LEFT else _default_right
 	var offset := -200 if from_side == SIDE.LEFT else 200
 	var start := sprite.position + Vector2(offset, 0.0)
 	var end := sprite.position
@@ -105,6 +110,8 @@ func _leave(from_side: String, sprite: Sprite) -> void:
 	_tween.start()
 # warning-ignore:return_value_discarded
 	_tween.seek(0.0)
+	# Clear the `_displayed` on this side now that the character has left.
+	_displayed[from_side] = null
 
 # If the player presses Enter before the character animations end, seek to the end of the animations.
 func _unhandled_input(event: InputEvent) -> void:
