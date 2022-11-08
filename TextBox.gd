@@ -39,13 +39,6 @@ func _ready() -> void:
 # warning-ignore:return_value_discarded
 	_choice_selector.connect("choice_made", self, "_on_ChoiceSelector_choice_made")
 
-# The works, but keeps reading the left mouse button every frame until it's released, so all text until the next choice flashes past.
-#func _process(_delta: float) -> void:
-#	if (Input.is_mouse_button_pressed(BUTTON_LEFT)):
-#		if _blinking_arrow.visible:
-#			emit_signal("next_requested")
-#		else:
-#			_tween.seek(INF)
 
 # The choices are a child of the text box, so we have to hide nodes manually. The Director can call this method to display choices.
 func display_choices(choices:Array) -> void:

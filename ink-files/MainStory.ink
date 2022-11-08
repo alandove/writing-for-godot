@@ -1,4 +1,5 @@
 VAR score = 0
+VAR characters = "Sophia, Dani"
 
 /* ---------------------------------
 
@@ -25,7 +26,7 @@ Now the text is three lines long, and I've finally fixed the system so it will f
 And here's another line that might get eaten.
 
 * [Start]
-//# fade_out
+# fade_out
 -> intro
 
 === intro ===

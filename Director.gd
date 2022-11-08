@@ -4,13 +4,14 @@ onready var story := $InkPlayer
 onready var _textbox := $TextBox
 onready var _character_displayer := $CharacterDisplayer
 onready var _background := $Background
+onready var _anim_player: AnimationPlayer = $FadeAnimationPlayer
+onready var characters: String = story.GetVariable("characters")
 var character_name: String
-var timer := Timer.new()
 
 ## Emitted when a transition, such as a fade in or fade out of the whole scene, ends. This lets the node wait for its animations to finish before triggering other events.
 signal transition_finished
 
-onready var _anim_player: AnimationPlayer = $FadeAnimationPlayer
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -18,15 +19,7 @@ func _ready() -> void:
 	story.connect("InkContinued", self, "_on_story_continued")
 	# warning-ignore:return_value_discarded
 	story.connect("InkChoices", self, "_on_choices")
-	
-#	# The timer should pace the display of text and keep signals from stepping on each other. Not sure it's doing much good.
-#	add_child(timer)
-#	timer.one_shot = true
-#	timer.wait_time = 0.1
-## warning-ignore:return_value_discarded
-#	timer.connect("timeout", story, "Continue")
-#	timer.start()
-	
+	# Start the story
 	story.Continue()
 
 func _on_story_continued(text, tags) -> void:
@@ -39,11 +32,12 @@ func _on_story_continued(text, tags) -> void:
 		var tag_array = tag.split(" ", true, 0)
 		# If the first element in the resulting array matches a function in this script, we call that function and send the array as an argument.
 		if self.has_method(tag_array[0]):
+			print("Now executing ", tag_array[0])
 			self.call(tag_array[0], tag_array)
 			# Attempting to get fade_out followed by fade_in to work.
 			if _anim_player.is_playing():
 				yield(self, "transition_finished")
-		elif tag_array.size() == 1:
+		elif characters.find(tag_array[0]) != -1:
 			character_name = tag_array[0]
 
 	if _anim_player.is_playing():
@@ -74,8 +68,8 @@ func fade_in(_args) -> void:
 	emit_signal("transition_finished")
 
 func fade_out(_args) -> void:
-	yield(_textbox.fade_out_async(), "completed")
 	_anim_player.play("fade_out")
+	yield(_textbox.fade_out_async(), "completed")
 	yield(_anim_player, "animation_finished")
 	emit_signal("transition_finished")
 

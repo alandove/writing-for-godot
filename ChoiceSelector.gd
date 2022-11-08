@@ -13,9 +13,11 @@ func display(choices: Array) -> void:
 		button.text = choice
 		choice_index = choices.find(choice,0)
 		add_child(button)
+		button.set_focus_mode(Control.FOCUS_ALL)
 # warning-ignore:return_value_discarded
 		button.connect("pressed", self, "_on_Button_pressed", [choice_index])
-#	(get_child(0) as Button).grab_focus() # Commenting this out fixes the spacebar bug, but then there's no way to pick choices from the keyboard.
+	yield(get_tree().create_timer(0.5), "timeout") # This timer prevents the spacebar from bouncing through the previous textbox and picking the first choice.
+	(get_child(0) as Button).grab_focus()
 
 # When the player clicks on a choice, send the `choice_made` signal and the index of the choice they made.
 func _on_Button_pressed(target_id) -> void:
