@@ -93,4 +93,4 @@ func show(arguments) -> void:
 	var side: String = arguments[4]
 	
 	# Now let's put it all together and ship it out to the CharacterDisplayer.
-	_character_displayer.display(character, side, expression, animation)
+	_character_displayer.display(character, expression, animation, side)

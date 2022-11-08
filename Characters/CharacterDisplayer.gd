@@ -31,7 +31,7 @@ func _on_Tween_tween_all_completed() -> void:
 	emit_signal("display_finished")
 
 # Display a character in the left or right position, with optional animation and expression choices.
-func display(character: Character, side: String = SIDE.LEFT, expression := "", animation := "") -> void:
+func display(character: Character, expression := "", animation := "", side: String = SIDE.LEFT) -> void:
 	# Raise an error if we passed an invalid side value.
 	assert(side in SIDE.values())
 	

@@ -16,14 +16,38 @@ A tag whose first word doesn't match a function, but which is a single string lo
 # show sophia happy enter left
 
 # Sophia
-This is some text that should appear in the text box initially, just to make sure it's working.
-Now it is two lines long.
+Okay, I just entered the scene. Wasn't that smooth?
+I think it was, and this second line displays nicely too.
 
 # show dani surprised enter right
 
 # Dani
-Now the text is three lines long, and I've finally fixed the system so it will feed one line at a time.
-And here's another line that might get eaten.
+Hey, Sophia, I'm surprised to see how smoothly you entered. Was my animation that good?
+
+# Sophia
+Sorry, gotta go.
+
+# show sophia neutral leave left
+
+# Dani
+Well, that was abrupt
+
+# show dani neutral leave right
+
+# show sophia angry enter right
+
+# Sophia
+Wait, where did he go? I just needed to get over here.
+
+# show dani surprised enter left
+
+# Dani
+Oh, there you are! 
+
+# show sophia neutral enter right
+
+# Sophia
+Here's my neutral expression, hopefully with no animation shenanigans.
 
 * [Start]
 # fade_out

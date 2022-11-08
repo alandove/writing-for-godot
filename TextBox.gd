@@ -50,6 +50,7 @@ func display_choices(choices:Array) -> void:
 # When the player makes a choice, we forward the signal to the Director so it can respond accordingly, and we reset visibility.
 func _on_ChoiceSelector_choice_made(target_id) -> void:
 	emit_signal("choice_made", target_id)
+	emit_signal("next_requested")
 	_name_background.show()
 	_text_label.show()
 
@@ -106,4 +107,9 @@ func fade_in_async() -> void:
 
 func fade_out_async() -> void:
 	_anim_player.play("fade_out")
+	hide()
+	_blinking_arrow.hide()
+	_name_label.text = ""
+	_text_label.bbcode_text = ""
+	_text_label.visible_characters = 0
 	yield(_anim_player, "animation_finished")
