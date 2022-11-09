@@ -5,9 +5,9 @@ VAR characters = "Sophia, Dani"
 
 In general, I'm designing the system to let the Ink file look somewhat like a theatrical script or screenplay.
 
-The parser on the Godot side expects each tag to be a space-delimited string that can contain a single function name and a set of arguments for that function, so for example "# show sophia enter left" will call the function called "show" and send it the other two tags ("enter" and "left") as arguments. 
+The parser on the Godot side expects each tag to be a space-delimited string that can contain a single function name and a set of arguments for that function, so for example "# show sophia enter left" will call the function called "show" and send it the other three tags ("sophia," "enter," and "left") as arguments.
 
-A tag whose first word doesn't match a function, but which is a single string long, will be taken as a character name and displayed in the name box above the textbox. The convention I'm adopting currently is to capitalize character names in the Ink file when used for this purpose. That helps distinguish character names in the script from tag groups intended to be processed as functions.
+A tag whose first word doesn't match a function, but does match a string in the `characters` variable defined in the Ink, will be taken as a character name, and displayed in the name box above the textbox. The convention I'm adopting currently is to capitalize character names in the Ink file when used for this purpose. That helps distinguish character names in the script from tag groups intended to be processed as functions. I might also use that as a way to identify dialogue lines for export to a voice acting script.
 
  ----------------------------------*/
 
@@ -30,7 +30,7 @@ Sorry, gotta go.
 # show sophia neutral leave right
 
 # Dani
-Well, that was abrupt
+Well, that was abrupt.
 
 # show dani neutral leave left
 
@@ -44,7 +44,7 @@ Wait, where did he go? I just needed to get over here.
 # Dani
 Oh, there you are! 
 
-# show sophia neutral enter left
+# show sophia neutral none left
 
 # Sophia
 Here's my neutral expression, hopefully with no animation shenanigans.

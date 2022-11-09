@@ -11,7 +11,7 @@ const SIDE := {LEFT = "left", RIGHT = "right"}
 ## Use this color to animate characters fading in and out.
 const COLOR_WHITE_TRANSPARENT = Color(1.0, 1.0, 1.0, 0.0)
 ## Map animation text ids to a function that animates a character sprite
-const ANIMATIONS := {"enter": "_enter", "leave": "_leave"}
+const ANIMATIONS := {"enter": "_tween_enter", "leave": "_tween_leave"}
 
 var _displayed := {left = null, right = null}
 
@@ -29,12 +29,16 @@ func _ready() -> void:
 	# Tween for the animation functions
 # warning-ignore:return_value_discarded
 	_tween.connect("tween_all_completed", self, "_on_Tween_tween_all_completed")
+
+func exeunt() -> void:
+	_left_sprite.hide()
+	_right_sprite.hide()
 	
 func _on_Tween_tween_all_completed() -> void:
 	emit_signal("display_finished")
 
 # Display a character in the left or right position, with optional animation and expression choices.
-func display(character: Character, expression := "", animation := "", side: String = SIDE.LEFT) -> void:
+func display(character: Character, expression := "", animation := "none", side: String = SIDE.LEFT) -> void:
 	# Raise an error if we passed an invalid side value.
 	assert(side in SIDE.values())
 	
@@ -54,12 +58,12 @@ func display(character: Character, expression := "", animation := "", side: Stri
 	sprite.texture = character.get_image(expression)
 	sprite.show()
 
-	if animation != "":
+	if animation != "none":
 		# 'call()' calls the function corresponding to the first argument and passes the other arguments to it.
 		call(ANIMATIONS[animation], side, sprite)
 
 ## Fade in and move the character to the anchor position.
-func _enter(from_side: String, sprite: Sprite) -> void:
+func _tween_enter(from_side: String, sprite: Sprite) -> void:
 	# Set default position initially so re-entry doesn't yield a sprite stuck halfway off the screen.
 	sprite.position = _default_left if from_side == SIDE.LEFT else _default_right
 	var offset := -200 if from_side == SIDE.LEFT else 200
@@ -83,7 +87,7 @@ func _enter(from_side: String, sprite: Sprite) -> void:
 	sprite.modulate = COLOR_WHITE_TRANSPARENT
 
 # Fade out and move the character offstage.
-func _leave(from_side: String, sprite: Sprite) -> void:
+func _tween_leave(from_side: String, sprite: Sprite) -> void:
 	var offset := -200 if from_side == SIDE.LEFT else 200
 	
 	var start := sprite.position
@@ -114,7 +118,8 @@ func _leave(from_side: String, sprite: Sprite) -> void:
 	_displayed[from_side] = null
 
 # If the player presses Enter before the character animations end, seek to the end of the animations.
-func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("ui_accept") and _tween.is_active():
-# warning-ignore:return_value_discarded
-		_tween.seek(INF)
+# Disabled for now because keyboard controls bounce through and truncate the animations unintentially.
+#func _unhandled_input(event: InputEvent) -> void:
+#	if event.is_action_pressed("ui_accept") and _tween.is_active():
+## warning-ignore:return_value_discarded
+#		_tween.seek(INF)

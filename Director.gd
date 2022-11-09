@@ -37,6 +37,8 @@ func _on_story_continued(text, tags) -> void:
 			# Attempting to get fade_out followed by fade_in to work.
 			if _anim_player.is_playing():
 				yield(self, "transition_finished")
+			if tag_array[0] == "show" and tag_array[3] != "none":
+				yield(_character_displayer, "display_finished")
 		elif characters.find(tag_array[0]) != -1:
 			character_name = tag_array[0]
 
@@ -71,6 +73,7 @@ func fade_out(_args) -> void:
 	_anim_player.play("fade_out")
 	yield(_textbox.fade_out_async(), "completed")
 	yield(_anim_player, "animation_finished")
+	_character_displayer.exeunt()
 	emit_signal("transition_finished")
 
 func background(arguments) -> void:
@@ -94,3 +97,4 @@ func show(arguments) -> void:
 	
 	# Now let's put it all together and ship it out to the CharacterDisplayer.
 	_character_displayer.display(character, expression, animation, side)
+
