@@ -1,9 +1,0 @@
-/home/alan/Documents/GameDev/writing-for-godot/.mono/temp/bin/Debug/writing-for-godot.dll
-/home/alan/Documents/GameDev/writing-for-godot/.mono/temp/bin/Debug/writing-for-godot.pdb
-/home/alan/Documents/GameDev/writing-for-godot/.mono/temp/obj/Debug/writing-for-godot.csproj.AssemblyReference.cache
-/home/alan/Documents/GameDev/writing-for-godot/.mono/temp/obj/Debug/writing-for-godot.GeneratedMSBuildEditorConfig.editorconfig
-/home/alan/Documents/GameDev/writing-for-godot/.mono/temp/obj/Debug/writing-for-godot.AssemblyInfoInputs.cache
-/home/alan/Documents/GameDev/writing-for-godot/.mono/temp/obj/Debug/writing-for-godot.AssemblyInfo.cs
-/home/alan/Documents/GameDev/writing-for-godot/.mono/temp/obj/Debug/writing-for-godot.csproj.CoreCompileInputs.cache
-/home/alan/Documents/GameDev/writing-for-godot/.mono/temp/obj/Debug/writing-for-godot.dll
-/home/alan/Documents/GameDev/writing-for-godot/.mono/temp/obj/Debug/writing-for-godot.pdb
