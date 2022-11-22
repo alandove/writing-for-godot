@@ -9,6 +9,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -40.0
 margin_top = -40.0
+mouse_filter = 2
 
 [node name="TextureRect" type="TextureRect" parent="."]
 anchor_left = 0.5
@@ -19,6 +20,7 @@ margin_left = -12.5
 margin_top = -13.5
 margin_right = 12.5
 margin_bottom = 13.5
+mouse_filter = 2
 texture = ExtResource( 1 )
 expand = true
 stretch_mode = 5

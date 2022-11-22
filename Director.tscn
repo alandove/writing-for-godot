@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://Director.gd" type="Script" id=1]
 [ext_resource path="res://ink-files/MainStory.ink" type="Resource" id=2]
@@ -11,6 +11,8 @@
 [ext_resource path="res://Characters/CharacterDisplayer.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Backgrounds/industrial_building.jpg" type="Texture" id=10]
 [ext_resource path="res://ChoiceSelector.tscn" type="PackedScene" id=11]
+[ext_resource path="res://FadingControl.gd" type="Script" id=12]
+[ext_resource path="res://SkipButton.tscn" type="PackedScene" id=13]
 
 [sub_resource type="Animation" id=1]
 resource_name = "fade_in"
@@ -267,6 +269,8 @@ texture = ExtResource( 4 )
 expand = true
 script = ExtResource( 8 )
 
+[node name="SkipButton" parent="TextBox" instance=ExtResource( 13 )]
+
 [node name="NameBackground" type="TextureRect" parent="TextBox"]
 modulate = Color( 1, 1, 1, -6.05992e-08 )
 margin_top = -34.0
@@ -274,6 +278,7 @@ margin_right = 338.0
 margin_bottom = 53.0
 texture = ExtResource( 6 )
 expand = true
+script = ExtResource( 12 )
 
 [node name="NameLabel" type="Label" parent="TextBox/NameBackground"]
 anchor_left = 0.5
@@ -288,6 +293,7 @@ mouse_filter = 1
 text = "Sophia"
 align = 1
 valign = 1
+script = ExtResource( 12 )
 
 [node name="TextLabel" type="RichTextLabel" parent="TextBox"]
 modulate = Color( 1, 1, 1, 0 )
@@ -332,6 +338,7 @@ __meta__ = {
 }
 
 [node name="Scrim" type="ColorRect" parent="."]
+modulate = Color( 1, 1, 1, 0 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2

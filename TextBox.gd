@@ -22,6 +22,7 @@ onready var _name_background: TextureRect = $NameBackground
 onready var _blinking_arrow: Control = $TextLabel/BlinkingArrow
 onready var _tween: Tween = $Tween
 onready var _anim_player: AnimationPlayer = $AnimationPlayer
+onready var _skip_button : Button = $SkipButton
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -38,21 +39,27 @@ func _ready() -> void:
 	## The text box forwards the `choice_made` signal to the Director via a signal.
 # warning-ignore:return_value_discarded
 	_choice_selector.connect("choice_made", self, "_on_ChoiceSelector_choice_made")
+	
+	# We connect to the `time_ticked` signal.
+# warning-ignore:return_value_discarded
+	_skip_button.connect("timer_ticked", self, "_on_SkipButton_timer_ticked")
 
 
 # The choices are a child of the text box, so we have to hide nodes manually. The Director can call this method to display choices.
 func display_choices(choices:Array) -> void:
-	_name_background.hide()
+	_name_background.disappear()
 	_text_label.hide()
 	_blinking_arrow.hide()
+	_skip_button.hide()
 	_choice_selector.display(choices)
 
 # When the player makes a choice, we forward the signal to the Director so it can respond accordingly, and we reset visibility.
 func _on_ChoiceSelector_choice_made(target_id) -> void:
 	emit_signal("choice_made", target_id)
 	emit_signal("next_requested")
-	_name_background.show()
+	_name_background.appear()
 	_text_label.show()
+	_skip_button.show()
 
 func display(text: String, character_name :="", speed := display_speed) -> void:
 	set_bbcode_text(text)
@@ -60,7 +67,17 @@ func display(text: String, character_name :="", speed := display_speed) -> void:
 	if speed != display_speed:
 		display_speed = speed
 	
-	if character_name != "":
+	# When the narrator is speaking, we don't want to display their name, so we hide the background. 
+	# We'll compare the speaking character's name to the narrator's display name to check if the current character is the narrator.
+	if character_name == ResourceDB.get_narrator().display_name:
+		_name_background.hide()
+	# If we're displaying a character's name for the first time in a scene, we'll play the name label's `appear` animation.
+	
+	elif character_name != "":
+		_name_background.show()
+		if _name_label.text == "":
+			_name_label.appear()
+			
 		_name_label.text = character_name
 
 # Update the TextLabel's text and hide the arrow. We use arrow visibility to encode player input.
@@ -90,13 +107,20 @@ func _on_Tween_tween_all_completed() -> void:
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_accept"):
-		if _blinking_arrow.visible:
-			emit_signal("next_requested")
-		else:
-			# When the player presses Enter while text is animating, jump to the end of the animation and display the blinking arrow.
-			# To do this, we seek the end of the Tween (INFinity).
+		advance_dialogue()
+
+# Either complete the current line or show the next dialogue line.
+func advance_dialogue() -> void:
+	if _blinking_arrow.visible:
+		emit_signal("next_requested")
+	else:
+		# When the player presses Enter while text is animating, jump to the end of the animation and display the blinking arrow.
+		# To do this, we seek the end of the Tween (INFinity).
 # warning-ignore:return_value_discarded
-			_tween.seek(INF)
+		_tween.seek(INF)
+
+func _on_SkipButton_timer_ticked() -> void:
+	advance_dialogue()
 
 # Fade animations for the text box, set up as coroutines with yield().
 func fade_in_async() -> void:

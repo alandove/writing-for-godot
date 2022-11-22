@@ -11,9 +11,6 @@ var character_name: String
 ## Emitted when a transition, such as a fade in or fade out of the whole scene, ends. This lets the node wait for its animations to finish before triggering other events.
 signal transition_finished
 
-
-
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	# warning-ignore:return_value_discarded
 	story.connect("InkContinued", self, "_on_story_continued")
