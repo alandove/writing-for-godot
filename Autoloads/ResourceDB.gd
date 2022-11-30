@@ -6,6 +6,7 @@ extends Node
 # We're loading all of the resources for the whole game into memory here. If the game gets huge, we might have to rework this to load only the resources for, say, each chapter.
 onready var _characters := _load_resources("res://Characters/", "_is_character")
 onready var _backgrounds := _load_resources("res://Backgrounds", "_is_background")
+onready var _sounds := _load_resources("res://Sounds", "_is_sound")
 
 # Identifier for the default "Narrator" character resource.
 const NARRATOR_ID := "narrator"
@@ -48,10 +49,16 @@ func _is_character(resource: Resource) -> bool:
 func _is_background(resource: Resource) -> bool:
 	return resource is Background
 
+func _is_sound(resource: Resource) -> bool:
+	return resource is Sound
+
 # The database allows you to get a resource of a given type. These functions provide the interface.
 func get_character(character_id: String) -> Character:
 	return _characters.get(character_id)
 	
 func get_background(background_id: String) -> Background:
 	return _backgrounds.get(background_id)
+
+func get_sound(sound_id: String) -> Sound:
+	return _sounds.get(sound_id)
 

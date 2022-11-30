@@ -31,7 +31,7 @@ func _on_story_continued(text, tags) -> void:
 		if self.has_method(tag_array[0]):
 			print("Now executing ", tag_array[0])
 			self.call(tag_array[0], tag_array)
-			# Attempting to get fade_out followed by fade_in to work.
+			# To get fade_out followed by fade_in to work.
 			if _anim_player.is_playing():
 				yield(self, "transition_finished")
 			if tag_array[0] == "show" and tag_array[3] != "none":
@@ -45,19 +45,14 @@ func _on_story_continued(text, tags) -> void:
 	_textbox.show()
 	_textbox.display(text, character_name)
 	yield(_textbox, "next_requested")
-#	timer.start()
 	story.Continue()
 
 func _on_choices(choices) -> void:
 	yield(_textbox, "next_requested")
-	# Print choices in the console for debugging.
-#	for choice in choices:
-#		print(choice)
 	# Display choices in the TextBox, wait for user input, and continue the story based on that.
 	_textbox.display_choices(choices)
 	var chosen = yield(_textbox, "choice_made")
 	story.ChooseChoiceIndexAndContinue(chosen)
-#	timer.start()
 
 # Functions and `yield` will play animations in sequence.
 func fade_in(_args) -> void:
@@ -95,3 +90,18 @@ func show(arguments) -> void:
 	# Now let's put it all together and ship it out to the CharacterDisplayer.
 	_character_displayer.display(character, expression, animation, side)
 
+func play(arguments) -> void:
+	# Create an AudioStreamPlayer, add it to the scene tree, then set the stream and play it.
+	# Because we're generating these in code, we can add more AudioStreamPlayers that will play simultaneously.
+	# TODO: Add a way to stop a specific player and free its associated node, possibly by using node names.
+	var sound: Sound = ResourceDB.get_sound(arguments[1])
+	var audio_player = AudioStreamPlayer.new()
+	audio_player.name = sound.id
+	print("The audio player is named ", audio_player.name)
+	add_child(audio_player)
+	if !sound:
+		print("Sound not found.")
+		return
+	audio_player.stream = sound.stream
+	print("Audio player now set to play ", sound.stream)
+	audio_player.play()

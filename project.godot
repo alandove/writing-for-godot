@@ -28,12 +28,18 @@ _global_script_classes=[ {
 "class": "ChoiceSelector",
 "language": "GDScript",
 "path": "res://ChoiceSelector.gd"
+}, {
+"base": "Resource",
+"class": "Sound",
+"language": "GDScript",
+"path": "res://Sounds/Sound.gd"
 } ]
 _global_script_class_icons={
 "Background": "",
 "Character": "",
 "CharacterDisplayer": "",
-"ChoiceSelector": ""
+"ChoiceSelector": "",
+"Sound": ""
 }
 
 [application]

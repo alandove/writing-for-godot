@@ -1,0 +1,10 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://Sounds/Sound.gd" type="Script" id=1]
+[ext_resource path="res://Sounds/mountain_trials.ogg" type="AudioStream" id=2]
+
+[resource]
+script = ExtResource( 1 )
+id = "mountain_trials"
+display_name = "Mountain Trials"
+stream = ExtResource( 2 )
