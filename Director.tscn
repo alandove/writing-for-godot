@@ -348,3 +348,8 @@ color = Color( 0, 0, 0, 1 )
 anims/fade_in = SubResource( 4 )
 anims/fade_out = SubResource( 5 )
 anims/setup = SubResource( 6 )
+
+[node name="Tween" type="Tween" parent="."]
+__meta__ = {
+"_editor_description_": "Audio tween."
+}

@@ -14,20 +14,22 @@ A tag whose first word doesn't match a function, but does match a string in the 
 # background community_garden
 # fade_in
 # show sophia happy enter right
-# play mountain_trials
+# audio music mountain_trials
 
 # Sophia
 Okay, I just entered the scene. Wasn't that smooth?
 I think it was, and this second line displays nicely too.
 
 # show dani surprised enter left
-# play cephalopod
+# audio music cephalopod
 
 # Dani
 Hey, Sophia, I'm surprised to see how smoothly you entered. Was my animation that good?
 
 # Sophia
 Sorry, gotta go.
+
+# audio fx fireball
 
 # show sophia neutral leave right
 
