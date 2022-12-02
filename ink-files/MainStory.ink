@@ -1,6 +1,6 @@
 VAR score = 0
 VAR characters = "Sophia, Dani"
-VAR music_volume = -0.0
+VAR music_volume = -6.0
 VAR fx_volume = -3.0
 
 /* ---------------------------------
@@ -32,6 +32,7 @@ Hey, Sophia, I'm surprised to see how smoothly you entered. Was my animation tha
 # Sophia
 Sorry, gotta go.
 
+# audio fx fireball
 # audio fx fireball
 
 # show sophia neutral leave right

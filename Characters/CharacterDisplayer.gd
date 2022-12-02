@@ -5,7 +5,6 @@ extends Node
 ## Emitted when the characters finish displaying or finish their animation
 signal display_finished
 
-
 ## Define a constant to select a valid side to display the characters. It maps to the keys of our _displayed variable below.
 const SIDE := {LEFT = "left", RIGHT = "right"}
 ## Use this color to animate characters fading in and out.
@@ -118,7 +117,7 @@ func _tween_leave(from_side: String, sprite: Sprite) -> void:
 	_displayed[from_side] = null
 
 # If the player presses Enter before the character animations end, seek to the end of the animations.
-# Disabled for now because keyboard controls bounce through and truncate the animations unintentially.
+# Disabled for now because keyboard controls bounce through and truncate the animations unintentionally.
 #func _unhandled_input(event: InputEvent) -> void:
 #	if event.is_action_pressed("ui_accept") and _tween.is_active():
 ## warning-ignore:return_value_discarded

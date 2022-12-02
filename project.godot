@@ -48,6 +48,10 @@ config/name="writing-for-godot"
 run/main_scene="res://Main.tscn"
 config/icon="res://icon.png"
 
+[audio]
+
+default_bus_layout=""
+
 [autoload]
 
 ResourceDB="*res://Autoloads/ResourceDB.gd"
