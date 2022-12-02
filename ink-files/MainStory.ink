@@ -1,5 +1,7 @@
 VAR score = 0
 VAR characters = "Sophia, Dani"
+VAR music_volume = -0.0
+VAR fx_volume = -3.0
 
 /* ---------------------------------
 
@@ -21,6 +23,7 @@ Okay, I just entered the scene. Wasn't that smooth?
 I think it was, and this second line displays nicely too.
 
 # show dani surprised enter left
+~ music_volume = -24.0
 # audio music cephalopod
 
 # Dani

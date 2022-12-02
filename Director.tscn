@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://Director.gd" type="Script" id=1]
 [ext_resource path="res://ink-files/MainStory.ink" type="Resource" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://ChoiceSelector.tscn" type="PackedScene" id=11]
 [ext_resource path="res://FadingControl.gd" type="Script" id=12]
 [ext_resource path="res://SkipButton.tscn" type="PackedScene" id=13]
+[ext_resource path="res://SoundSystem.tscn" type="PackedScene" id=14]
 
 [sub_resource type="Animation" id=1]
 resource_name = "fade_in"
@@ -349,7 +350,4 @@ anims/fade_in = SubResource( 4 )
 anims/fade_out = SubResource( 5 )
 anims/setup = SubResource( 6 )
 
-[node name="Tween" type="Tween" parent="."]
-__meta__ = {
-"_editor_description_": "Audio tween."
-}
+[node name="SoundSystem" parent="." instance=ExtResource( 14 )]

@@ -15,6 +15,7 @@ func _ready() -> void:
 
 # As soon as the player presses the skip button, start the timer.
 func _on_button_down() -> void:
+	print("Button is down.")
 	_timer.start()
 
 # Whenever the timer emits the `timeout` signal, we emit our `timer_ticked` signal, telling the text box to advance dialogues.
@@ -23,4 +24,8 @@ func _on_DelayTimer_timeout() -> void:
 	
 # On release of the button, we stop the timer.
 func _on_button_up() -> void:
+	print("Button is up.")
+	_timer.stop()
+
+func stop() -> void:
 	_timer.stop()

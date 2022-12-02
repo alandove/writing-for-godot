@@ -136,4 +136,5 @@ func fade_out_async() -> void:
 	_name_label.text = ""
 	_text_label.bbcode_text = ""
 	_text_label.visible_characters = 0
+	_skip_button.stop()
 	yield(_anim_player, "animation_finished")
