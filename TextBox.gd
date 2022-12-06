@@ -51,12 +51,12 @@ func display_choices(choices:Array) -> void:
 	_text_label.hide()
 	_blinking_arrow.hide()
 	_skip_button.hide()
+	_skip_button.stop()
 	_choice_selector.display(choices)
 
 # When the player makes a choice, we forward the signal to the Director so it can respond accordingly, and we reset visibility.
 func _on_ChoiceSelector_choice_made(target_id) -> void:
 	emit_signal("choice_made", target_id)
-	emit_signal("next_requested")
 	_name_background.appear()
 	_text_label.show()
 	_skip_button.show()

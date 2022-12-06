@@ -19,7 +19,15 @@ func _ready() -> void:
 	story.connect("InkContinued", self, "_on_story_continued")
 	# warning-ignore:return_value_discarded
 	story.connect("InkChoices", self, "_on_choices")
-	# Start the story
+	# Start with visible parts hidden, so the title screen can come up.
+	_textbox.hide()
+	_background.hide()
+	
+func start_story() -> void:
+	# Show visible parts.
+	_textbox.show()
+	_background.show()
+	# Start the story.
 	story.Continue()
 
 func _on_story_continued(text, tags) -> void:
@@ -39,10 +47,13 @@ func _on_story_continued(text, tags) -> void:
 				yield(self, "transition_finished")
 			if tag_array[0] == "show" and tag_array[3] != "none":
 				yield(_character_displayer, "display_finished")
-		# If the tag matches a character name, set it to display in the name box.
+		# If the tag matches a character name, set it to display in the name box, and if there's a second tag with it, process that as an expression change.
 		elif characters.find(tag_array[0]) != -1:
 			character_name = tag_array[0]
-
+			if tag_array.size() > 1:
+				var show_arguments: Array = ["show", character_name.to_lower(), tag_array[1], "none", "left"]
+				show(show_arguments)
+			
 	if _anim_player.is_playing():
 		yield(self, "transition_finished")
 	# Now we'll display the text in the textbox, wait for the display to finish, then continue to the next line.

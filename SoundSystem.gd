@@ -50,7 +50,22 @@ func play_audio(track, type) -> void:
 	audio_player.connect("finished", self, "_audio_player_finished", [audio_player])
 	add_child(audio_player)
 	audio_player.add_to_group(type)
-	audio_player.play()
+	# If we're starting a music track, fade it in.
+	if type == "music":
+		audio_player.volume_db = (volume -30.0)
+		audio_player.play()
+		_tween.interpolate_property(
+			audio_player,
+			"volume_db",
+			-30.0,
+			volume,
+			1.0,
+			Tween.TRANS_QUAD,
+			Tween.EASE_IN
+		)
+		_tween.start()
+	else:
+		audio_player.play()
 
 # Whenever a music or fx `AudioStreamPlayer` finishes, free it from the tree.
 func _audio_player_finished(audio_player_ref) -> void:

@@ -16,13 +16,11 @@ func display(choices: Array) -> void:
 		button.set_focus_mode(Control.FOCUS_ALL)
 # warning-ignore:return_value_discarded
 		button.connect("pressed", self, "_on_Button_pressed", [choice_index])
-#	yield(get_tree().create_timer(0.5), "timeout") # This timer prevents the spacebar from bouncing through the previous textbox and picking the first choice.
-#	(get_child(0) as Button).grab_focus()
 
 func _input(event: InputEvent) -> void:
 	# Grab keyboard focus on the buttons when the user presses the Tab key.
 	if event.is_action_pressed("ui_focus_next"):
-		(get_child(0) as Button).grab_focus()
+		(get_child(0) as Button).grab_focus() # For reasons I can't figure out, this will highlight the second button even though it should highlight the first. But at least keyboard control works.
 	
 # When the player clicks on a choice, send the `choice_made` signal and the index of the choice they made.
 func _on_Button_pressed(target_id) -> void:

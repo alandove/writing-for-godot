@@ -13,89 +13,83 @@ A tag whose first word doesn't match a function, but does match a string in the 
 
  ----------------------------------*/
 
-# background community_garden
-# fade_in
-# show sophia happy enter right
-# audio music mountain_trials
-
-# Sophia
-Okay, I just entered the scene. Wasn't that smooth?
-I think it was, and this second line displays nicely too.
-
-# show dani surprised enter left
-~ music_volume = -24.0
-# audio music cephalopod
-
-# Dani
-Hey, Sophia, I'm surprised to see how smoothly you entered. Was my animation that good?
-
-# Sophia
-Sorry, gotta go.
-
-# audio fx fireball
-# audio fx fireball
-
-# show sophia neutral leave right
-
-# Dani
-Well, that was abrupt.
-
-# show dani neutral leave left
-
-# show sophia angry enter left
-
-# Sophia
-Wait, where did he go? I just needed to get over here.
-
-# show dani surprised enter right
-
-# Dani
-Oh, there you are! 
-
-# show sophia neutral none left
-
-# Sophia
-Here's my neutral expression, hopefully with no animation shenanigans.
-
-* [Start]
-# fade_out
--> intro
-
-=== intro ===
 # background industrial_building
 # fade_in
-# show sophia neutral enter left
+# show sophia happy enter right
+# audio music cephalopod
 
 # Sophia
-Well, this looks like the right place. Now I just need to find a terminal.
+This looks like the right place. 
 
-# show dani neutral enter right
+# show dani surprised enter left
 # Dani
-Hey, Sophia! What are you doing down here?
+Hey, Sophia, what're you doing down here?
 
-# Sophia 
-Oh, hi Dani. I'm trying to figure out how our system works.
+# Sophia neutral
+Oh hi, Dani. I'm trying to figure out how our system works.
 
-# Dani 
+# Dani neutral
 Our system?
 
-# Sophia 
+# audio fx fireball
+# Sophia
 Yeah, the system that displays us on the screen, draws our backgrounds, and generally turns our world into a playable game.
 Like the way each sentence I say comes out as a separate line in that text box at the bottom. Or the way we get choices.
 
-* [Like] 
-* [This] 
+* [Like]
+-> like
 
-- The choice has been made! 
+* [This]
+-> this
+
+* [Or something else]
+-> something_else
+
+=== like ===
+# Sophia
+You chose "Like," didn't you?
+
+# Dani
+I didn't choose anything. Someone else did.
+
+# Sophia
+Right, the player. That's who's controlling this experience.
+-> resume_path
+
+=== this ===
+# Dani
+Someone just clicked "This," but it wasn't me.
+
+# Sophia
+It wasn't me either. I think it was the player, the person controlling this experience.
+-> resume_path
+
+=== something_else ===
+# Sophia
+Hmm, what does "Something else" entail?
+
+# Dani
+More importantly, who chose it?
+
+# Sophia
+Oh that? That was the player, the person controlling this experience.
+-> resume_path
+
+=== resume_path ===
+# Dani surprised
+You mean we're just puppets with no free will?
+
+# Sophia angry
+No, silly, we're characters in a game. We have our own thoughts and internal lives, but they're being, how shall I put this?
+
+# Sophia happy
+Guided. Consider it the divine hand of fate.
+
+# Dani neutral
+Hmm. I'll have to think about that.
 
 # Dani 
-But no matter which choice you made, you got the same next line. So our choices don't matter?
-
-# Sophia 
-Sure they do! Some of them, at least. That one didn't, but others will, so choose wisely, okay?
-
-# Dani 
-Um, okay. By the way, what's that number up there for?
+By the way, what's that number up there for?
 ~score = score + 10
 
 # Sophia 
