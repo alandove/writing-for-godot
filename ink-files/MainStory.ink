@@ -76,18 +76,75 @@ Guided. Consider it the divine hand of fate.
 
 # Dani neutral
 Hmm. I'll have to think about that.
+-> topics
+
+=== topics ===
+# Sophia neutral
+Okay, what part of our system should we explore next?
+
+* [The infrastructure]
+-> infrastructure
+
+* [The story]
+-> story
+
+* [The graphics and audio]
+-> resources
+
+* -> all_done
+
+=== infrastructure ===
+# Sophia neutral
+Good choice, infrastructure is always important. The system runs in the Open Source game engine Godot.
+
+# Dani happy
+Excellent. I love Open Source!
+
+# Sophia neutral
+Glad you approve. Anyway, in addition to the textbox node, there are several others. You can look at the code to see them all.
+
+# Dani neutral
+So the code for this demo is free to browse? Oh, yeah, I see it's under the MIT license, so people can even copy it and reuse it. Nice.
+Is the whole system just in Godot?
+
+# Sophia
+No, there's also a middleware layer that uses Ink, the narrative scripting language.
+Ink provides a simple but powerful way to write anything from a simple dialogue script to a complex branching narrative.
+
+# Dani
+Okay, so then the Godot system parses the story coming in from the Ink file, and uses it to run the game itself?
+
+# Sophia
+Exactly.
+
+# Dani
+Very cool. Let's learn more about the rest of the system.
+-> topics
+
+=== story ===
+placeholder text.
+-> topics
+
+=== resources ===
+placeholder text.
+-> topics
+
+=== all_done ===
+# Sophia neutral
+Oh, it looks like that's all there is to explore for now.
+
+# Dani neutral
+Oh, well. Is there more documentation somewhere for folks who want to use this system?
+
+# Sophia
+Not much. At this point the best thing to do would be to fork the repository, download the code, and start reading the scripts.
 
 # Dani 
-By the way, what's that number up there for?
-~score = score + 10
+Good to know. In that case, I guess this is goodbye. 
 
-# Sophia 
-Oh, that? That's the score. It's just an arbitrary value that's there to test out tracking a variable. 
+# Sophia
+Indeed it is. Goodbye.
 
-And just for asking about it, you earned us some points. See? Our score is now {score}. Good job!
-
-# Dani 
-Wow, that was easy. 
 # fade_out
 
     -> END

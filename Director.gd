@@ -33,6 +33,7 @@ func start_story() -> void:
 	story.Continue()
 
 func _on_story_continued(text, tags) -> void:
+	print(text)
 	print(tags)
 	# TODO: The tag parsing system is all in here right now, but the functions it calls probably belong in a separate script.
 	# Strategy: "# function_name argument_1 argument_2 etc" in the Ink file gets parsed into the function name and arguments, then we call(function_name(arguments: Array).
