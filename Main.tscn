@@ -10,5 +10,6 @@ anchor_bottom = 1.0
 script = ExtResource( 3 )
 
 [node name="TitleScreen" parent="." instance=ExtResource( 2 )]
+focus_mode = 2
 
 [node name="Director" parent="." instance=ExtResource( 1 )]

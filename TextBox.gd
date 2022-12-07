@@ -1,5 +1,4 @@
 ## Display character lines in a dialogue, with animated text and player input processing.
-
 extends Control
 
 ## Emitted when the next line is requested, either by the player or because the current line has been on screen long enough.
@@ -26,8 +25,6 @@ onready var _skip_button : Button = $SkipButton
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	hide()
-	_blinking_arrow.hide()
 	_name_label.text = ""
 	_text_label.bbcode_text = ""
 	_text_label.visible_characters = 0

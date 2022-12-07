@@ -37,15 +37,6 @@ Yeah, the system that displays us on the screen, draws our backgrounds, and gene
 Like the way each sentence I say comes out as a separate line in that text box at the bottom. Or the way we get choices.
 
 * [Like]
--> like
-
-* [This]
--> this
-
-* [Or something else]
--> something_else
-
-=== like ===
 # Sophia
 You chose "Like," didn't you?
 
@@ -54,17 +45,15 @@ I didn't choose anything. Someone else did.
 
 # Sophia
 Right, the player. That's who's controlling this experience.
--> resume_path
 
-=== this ===
+* [This]
 # Dani
 Someone just clicked "This," but it wasn't me.
 
 # Sophia
 It wasn't me either. I think it was the player, the person controlling this experience.
--> resume_path
 
-=== something_else ===
+* [Or something else]
 # Sophia
 Hmm, what does "Something else" entail?
 
@@ -73,10 +62,10 @@ More importantly, who chose it?
 
 # Sophia
 Oh that? That was the player, the person controlling this experience.
--> resume_path
 
-=== resume_path ===
-# Dani surprised
+// Gather the weave.
+
+- # Dani surprised
 You mean we're just puppets with no free will?
 
 # Sophia angry

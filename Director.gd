@@ -1,3 +1,4 @@
+class_name Director
 extends Node
 
 onready var story := $InkPlayer
@@ -19,13 +20,14 @@ func _ready() -> void:
 	story.connect("InkContinued", self, "_on_story_continued")
 	# warning-ignore:return_value_discarded
 	story.connect("InkChoices", self, "_on_choices")
+# warning-ignore:return_value_discarded
+	story.connect("InkEnded", self, "_on_end")
 	# Start with visible parts hidden, so the title screen can come up.
 	_textbox.hide()
 	_background.hide()
 	
 func start_story() -> void:
-	# Show visible parts.
-	_textbox.show()
+	# Show the initial background - the textbox will show up on its own.
 	_background.show()
 	# Start the story.
 	story.Continue()
@@ -112,3 +114,6 @@ func audio(arguments) -> void:
 	var track = arguments[2]
 	var type = arguments[1]
 	_sound_system.play_audio(track, type)
+
+func _on_end() -> void:
+	get_tree().quit()

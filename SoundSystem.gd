@@ -54,6 +54,7 @@ func play_audio(track, type) -> void:
 	if type == "music":
 		audio_player.volume_db = (volume -30.0)
 		audio_player.play()
+# warning-ignore:return_value_discarded
 		_tween.interpolate_property(
 			audio_player,
 			"volume_db",
@@ -63,6 +64,7 @@ func play_audio(track, type) -> void:
 			Tween.TRANS_QUAD,
 			Tween.EASE_IN
 		)
+# warning-ignore:return_value_discarded
 		_tween.start()
 	else:
 		audio_player.play()
