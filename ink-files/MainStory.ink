@@ -31,7 +31,6 @@ Oh hi, Dani. I'm trying to figure out how our system works.
 # Dani neutral
 Our system?
 
-# audio fx fireball
 # Sophia
 Yeah, the system that displays us on the screen, draws our backgrounds, and generally turns our world into a playable game.
 Like the way each sentence I say comes out as a separate line in that text box at the bottom. Or the way we get choices.
@@ -75,12 +74,33 @@ No, silly, we're characters in a game. We have our own thoughts and internal liv
 Guided. Consider it the divine hand of fate.
 
 # Dani neutral
-Hmm. I'll have to think about that.
+Hmm. I'll have to think about that. In the meantime, could we turn the music down a little bit?
+
+# Sophia
+No problem. I'll just decrement the volume variable in the Ink file and repeat the audio tag ...
+~ music_volume = music_volume - 6.0
+# audio music cephalopod
+
+# Dani surprised
+Whoah, how did you do that?
+
+# Sophia happy
+It's the magic of our system. Want to learn about it?
+
+# Dani neutral
+Sure, what is there to know?
 -> topics
 
 === topics ===
+{ topics <= 1:
 # Sophia neutral
+What part of the system should we talk about first?
+}
+
+{ topics >1:
+# Sophia neutral 
 Okay, what part of our system should we explore next?
+}
 
 * [The infrastructure]
 -> infrastructure
@@ -105,6 +125,8 @@ Glad you approve. Anyway, in addition to the textbox node, there are several oth
 
 # Dani neutral
 So the code for this demo is free to browse? Oh, yeah, I see it's under the MIT license, so people can even copy it and reuse it. Nice.
+
+{ not story:
 Is the whole system just in Godot?
 
 # Sophia
@@ -116,17 +138,94 @@ Okay, so then the Godot system parses the story coming in from the Ink file, and
 
 # Sophia
 Exactly.
+}
+
+{ story:
+Let's see if I've got this straight: the Ink story we talked about has the story logic,
+and the Godot part interprets the Ink story and runs the game logic?
+
+# Sophia
+Exactly.
+}
 
 # Dani
 Very cool. Let's learn more about the rest of the system.
 -> topics
 
 === story ===
-placeholder text.
+# Sophia neutral
+Stories drive many of the best games, don't they? In our case, the story really does drive the game.
+Specifically, the story written in the narrative scripting language Ink.
+
+# Dani happy
+Oh, Ink is great! It makes it easy to write branching narratives and dialogue trees.
+
+# Sophia happy
+Exactly! And in our framework, the Ink file also has all of the stage management.
+
+# Dani neutral
+You mean things like when and how we enter and leave the scene, and what kind of music and sound effects play?
+
+# Sophia neutral
+Exactly. So I can fire off a sound effect at any point.
+# audio fx fireball
+
+# Dani surprised
+Wow, that was cool. I'm going to do it too.
+# audio fx fireball
+That just came from a simple line of tags in the Ink file, didn't it?
+
+# Sophia neutral
+Yep. Let's talk about the other parts of the system too, though.
+# Dani neutral
 -> topics
 
 === resources ===
-placeholder text.
+# Sophia neutral
+The graphics and audio are stored in the local game directory, of course, but instead of being loaded directly as files, they're loaded as Godot Resources.
+
+# Dani neutral
+Isn't that more complicated?
+
+# Sophia neutral
+A little bit, but it's also much more robust than relying on something like filename extensions.
+
+# Dani
+So how does the game designer get the resources loaded?
+
+# Sophia
+It's not too hard. They just need to go into the Godot file manager, choose "create a resource" for the character sprite, background image, or audio file,
+and then add an Object in the "Script Variables" section of the resource. 
+For example, our background right now is industrial_building.jpg, but it's loaded from a resource called industrial_building.tres.
+
+# Dani
+How creative.
+
+# Sophia angry
+Hey, simple, descriptive names help a lot in understanding the code, okay?
+
+# Dani happy
+Calm down, Sis. I was joking.
+
+# Sophia neutral
+Okay, anyway, all of the resources get loaded into the ResourceDB node at the start of the game, and then they're accessible to the system instantly.
+For example, I can just snap my fingers and ...
+
+# background community_garden
+
+# Dani neutral
+That's pretty clever. Maybe a bit sudden, but clever. I assume there are fade_in and fade_out functions to make background transitions like that smoother in an actual game?
+
+# Sophia
+Of course.
+
+# Dani
+Cool. Let me see if I can switch it back before we proceed, though.
+# background industrial_building
+Yay, it worked!
+
+Let's talk about the rest of the system now.
+
 -> topics
 
 === all_done ===
@@ -137,7 +236,7 @@ Oh, it looks like that's all there is to explore for now.
 Oh, well. Is there more documentation somewhere for folks who want to use this system?
 
 # Sophia
-Not much. At this point the best thing to do would be to fork the repository, download the code, and start reading the scripts.
+A little bit. At this point the best thing to do would be to fork the repository, download the code, and start reading the scripts.
 
 # Dani 
 Good to know. In that case, I guess this is goodbye. 
@@ -146,5 +245,4 @@ Good to know. In that case, I guess this is goodbye.
 Indeed it is. Goodbye.
 
 # fade_out
-
     -> END
