@@ -272,6 +272,20 @@ script = ExtResource( 8 )
 
 [node name="SkipButton" parent="TextBox" instance=ExtResource( 13 )]
 
+[node name="SaveButton" type="Button" parent="TextBox"]
+margin_left = 117.0
+margin_top = 93.0
+margin_right = 163.0
+margin_bottom = 116.0
+text = "Save"
+
+[node name="LoadButton" type="Button" parent="TextBox"]
+margin_left = 37.0
+margin_top = 93.0
+margin_right = 92.0
+margin_bottom = 116.0
+text = "Load"
+
 [node name="NameBackground" type="TextureRect" parent="TextBox"]
 modulate = Color( 1, 1, 1, -6.05992e-08 )
 margin_top = -34.0

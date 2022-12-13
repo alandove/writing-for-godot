@@ -8,6 +8,10 @@ onready var _background := $Background
 onready var _anim_player: AnimationPlayer = $FadeAnimationPlayer
 onready var _sound_system := $SoundSystem
 
+# TODO: Move the save and load functions up to Main, and signal for them from Director.
+onready var _save_button : Button = $TextBox/SaveButton
+onready var _load_button : Button = $TextBox/LoadButton
+
 # Load variables from the Ink file.
 onready var characters: String = story.GetVariable("characters")
 var character_name: String
@@ -22,6 +26,12 @@ func _ready() -> void:
 	story.connect("InkChoices", self, "_on_choices")
 # warning-ignore:return_value_discarded
 	story.connect("InkEnded", self, "_on_end")
+	
+	# TODO: Move save and load functions up to Main, and signal for them from Director.
+# warning-ignore:return_value_discarded
+	_save_button.connect("button_down", self, "_save_requested")
+# warning-ignore:return_value_discarded
+	_load_button.connect("button_down", self, "_load_requested")
 	# Start with visible parts hidden, so the title screen can come up.
 	_textbox.hide()
 	_background.hide()
@@ -32,7 +42,14 @@ func start_story() -> void:
 	# Start the story.
 	story.Continue()
 
+func load_game() -> void:
+	# TODO: Build a function that reads the Ink state from a file, sets up the appropriate knot and and characters, then calls `start_story`.
+	pass
+
 func _on_story_continued(text, tags) -> void:
+#	_load_requested()
+#	print("The loaded story state in JSON format is ", story.GetState())
+
 	print(text)
 	print(tags)
 	# TODO: The tag parsing system is all in here right now, but the functions it calls probably belong in a separate script.
@@ -105,6 +122,8 @@ func show(arguments) -> void:
 	var animation: String = arguments[3]
 	var side: String = arguments[4]
 	
+	# TODO: Add some code here to store the new character information in the Ink file, so we can reload everyone properly from a save file. I may need to store a dictionary of characters shown in the Ink.
+	
 	# Now let's put it all together and ship it out to the CharacterDisplayer.
 	_character_displayer.display(character, expression, animation, side)
 
@@ -118,3 +137,17 @@ func audio(arguments) -> void:
 
 func _on_end() -> void:
 	get_tree().quit()
+
+# TODO: Move the save and load functions up to Main, and signal for them from Director.
+func _save_requested() -> void:
+#	var file = File.new()
+#	file.open("save.json", File.WRITE)
+	story.SaveStateOnDisk("user://save.json")
+#	file.close()
+
+func _load_requested() -> void:
+#	var file = File.new()
+#	file.open("save.json", File.READ)
+	story.LoadStateFromDisk("user://save.json")
+#	file.close()
+
