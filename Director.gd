@@ -9,8 +9,8 @@ onready var _anim_player: AnimationPlayer = $FadeAnimationPlayer
 onready var _sound_system := $SoundSystem
 
 # TODO: Move the save and load functions up to Main, and signal for them from Director.
-onready var _save_button : Button = $TextBox/SaveButton
-onready var _load_button : Button = $TextBox/LoadButton
+#onready var _save_button : Button = $TextBox/SaveButton
+#onready var _load_button : Button = $TextBox/LoadButton
 
 # Load variables from the Ink file.
 onready var characters: String = story.GetVariable("characters")
@@ -29,9 +29,9 @@ func _ready() -> void:
 	
 	# TODO: Move save and load functions up to Main, and signal for them from Director.
 # warning-ignore:return_value_discarded
-	_save_button.connect("button_down", self, "_save_requested")
+#	_save_button.connect("button_down", self, "_save_requested")
 # warning-ignore:return_value_discarded
-	_load_button.connect("button_down", self, "_load_requested")
+#	_load_button.connect("button_down", self, "_load_requested")
 	# Start with visible parts hidden, so the title screen can come up.
 	_textbox.hide()
 	_background.hide()
@@ -139,15 +139,15 @@ func _on_end() -> void:
 	get_tree().quit()
 
 # TODO: Move the save and load functions up to Main, and signal for them from Director.
-func _save_requested() -> void:
+#func _save_requested() -> void:
 #	var file = File.new()
 #	file.open("save.json", File.WRITE)
-	story.SaveStateOnDisk("user://save.json")
+#	story.SaveStateOnDisk("user://save.json")
 #	file.close()
 
-func _load_requested() -> void:
+#func _load_requested() -> void:
 #	var file = File.new()
 #	file.open("save.json", File.READ)
-	story.LoadStateFromDisk("user://save.json")
+#	story.LoadStateFromDisk("user://save.json")
 #	file.close()
 

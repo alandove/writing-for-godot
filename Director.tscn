@@ -12,8 +12,8 @@
 [ext_resource path="res://Backgrounds/industrial_building.jpg" type="Texture" id=10]
 [ext_resource path="res://ChoiceSelector.tscn" type="PackedScene" id=11]
 [ext_resource path="res://FadingControl.gd" type="Script" id=12]
-[ext_resource path="res://SkipButton.tscn" type="PackedScene" id=13]
 [ext_resource path="res://SoundSystem.tscn" type="PackedScene" id=14]
+[ext_resource path="res://ButtonBar.gd" type="Script" id=15]
 
 [sub_resource type="Animation" id=1]
 resource_name = "fade_in"
@@ -264,27 +264,24 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = -140.0
-mouse_filter = 0
 theme = ExtResource( 7 )
 texture = ExtResource( 4 )
 expand = true
 script = ExtResource( 8 )
 
-[node name="SkipButton" parent="TextBox" instance=ExtResource( 13 )]
-
-[node name="SaveButton" type="Button" parent="TextBox"]
-margin_left = 117.0
-margin_top = 93.0
-margin_right = 163.0
-margin_bottom = 116.0
-text = "Save"
-
-[node name="LoadButton" type="Button" parent="TextBox"]
-margin_left = 37.0
-margin_top = 93.0
-margin_right = 92.0
-margin_bottom = 116.0
-text = "Load"
+[node name="ButtonBar" type="HBoxContainer" parent="TextBox"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -405.0
+margin_top = -39.0
+margin_right = 405.0
+margin_bottom = -16.0
+focus_mode = 2
+mouse_filter = 2
+custom_constants/separation = 25
+script = ExtResource( 15 )
 
 [node name="NameBackground" type="TextureRect" parent="TextBox"]
 modulate = Color( 1, 1, 1, -6.05992e-08 )
@@ -320,7 +317,7 @@ margin_left = -349.0
 margin_top = -23.5
 margin_right = 349.0
 margin_bottom = 55.5
-mouse_filter = 1
+mouse_filter = 2
 bbcode_enabled = true
 bbcode_text = "Hi, I'm Sophia. Who are you?"
 meta_underlined = false

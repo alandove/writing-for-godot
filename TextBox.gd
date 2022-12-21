@@ -4,6 +4,7 @@ extends Control
 ## Emitted when the next line is requested, either by the player or because the current line has been on screen long enough.
 ## The Director will catch this signal and use it to step to the next line, animation, or other event.
 signal next_requested
+
 signal display_finished
 signal choice_made(target_id)
 
@@ -21,7 +22,8 @@ onready var _name_background: TextureRect = $NameBackground
 onready var _blinking_arrow: Control = $TextLabel/BlinkingArrow
 onready var _tween: Tween = $Tween
 onready var _anim_player: AnimationPlayer = $AnimationPlayer
-onready var _skip_button : Button = $SkipButton
+onready var _button_bar: HBoxContainer = $ButtonBar
+#onready var _skip_button : Button = $ButtonBar/SkipButton
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -39,16 +41,15 @@ func _ready() -> void:
 	
 	# We connect to the `time_ticked` signal.
 # warning-ignore:return_value_discarded
-	_skip_button.connect("timer_ticked", self, "_on_SkipButton_timer_ticked")
-
+#	_skip_button.connect("timer_ticked", self, "_on_SkipButton_timer_ticked")
 
 # The choices are a child of the text box, so we have to hide nodes manually. The Director can call this method to display choices.
 func display_choices(choices:Array) -> void:
 	_name_background.disappear()
 	_text_label.hide()
 	_blinking_arrow.hide()
-	_skip_button.hide()
-	_skip_button.stop()
+#	_skip_button.hide()
+#	_skip_button.stop()
 	_choice_selector.display(choices)
 
 # When the player makes a choice, we forward the signal to the Director so it can respond accordingly, and we reset visibility.
@@ -56,7 +57,7 @@ func _on_ChoiceSelector_choice_made(target_id) -> void:
 	emit_signal("choice_made", target_id)
 	_name_background.appear()
 	_text_label.show()
-	_skip_button.show()
+#	_skip_button.show()
 
 func display(text: String, character_name :="", speed := display_speed) -> void:
 	set_bbcode_text(text)
@@ -102,7 +103,7 @@ func _on_Tween_tween_all_completed() -> void:
 	# Once all the text is visible, show the arrow to indicate we can move to the next line.
 	_blinking_arrow.show()
 
-func _input(event: InputEvent) -> void:
+func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_accept"):
 		advance_dialogue()
 
@@ -133,5 +134,5 @@ func fade_out_async() -> void:
 	_name_label.text = ""
 	_text_label.bbcode_text = ""
 	_text_label.visible_characters = 0
-	_skip_button.stop()
+#	_skip_button.stop()
 	yield(_anim_player, "animation_finished")
