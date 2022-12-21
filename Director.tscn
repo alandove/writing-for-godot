@@ -240,7 +240,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Color( 1, 1, 1, 1 ) ]
+"values": [ Color( 0, 0, 0, 0 ) ]
 }
 
 [node name="Director" type="Node"]
@@ -279,7 +279,6 @@ margin_top = -39.0
 margin_right = 405.0
 margin_bottom = -16.0
 focus_mode = 2
-mouse_filter = 2
 custom_constants/separation = 25
 script = ExtResource( 15 )
 
@@ -334,6 +333,7 @@ margin_left = 312.0
 margin_top = 20.0
 margin_right = -267.0
 margin_bottom = -20.0
+mouse_filter = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="TextBox"]
 autoplay = "setup"
@@ -350,7 +350,7 @@ __meta__ = {
 }
 
 [node name="Scrim" type="ColorRect" parent="."]
-modulate = Color( 1, 1, 1, 0 )
+modulate = Color( 0, 0, 0, 0 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
