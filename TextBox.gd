@@ -103,8 +103,8 @@ func _on_Tween_tween_all_completed() -> void:
 	# Once all the text is visible, show the arrow to indicate we can move to the next line.
 	_blinking_arrow.show()
 
-func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("ui_accept"):
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("next"):
 		advance_dialogue()
 
 # Either complete the current line or show the next dialogue line.

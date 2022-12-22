@@ -89,7 +89,12 @@ func _on_choices(choices) -> void:
 	var chosen = yield(_textbox, "choice_made")
 	story.ChooseChoiceIndexAndContinue(chosen)
 
-# Functions and `yield` will play animations in sequence.
+func _on_end() -> void:
+	get_tree().quit()
+
+# =====Begin functions intended to be called from the Ink file.=====
+
+# Fade functions and `yield` will play animations in sequence.
 func fade_in(_args) -> void:
 	_anim_player.play("fade_in")
 	yield(_anim_player, "animation_finished")
@@ -117,7 +122,6 @@ func show(arguments) -> void:
 	# If the ResourceDB couldn't find that character name, don't try to show them.
 	if !character:
 		return
-	
 	var expression: String = arguments[2]
 	var animation: String = arguments[3]
 	var side: String = arguments[4]
@@ -134,9 +138,6 @@ func audio(arguments) -> void:
 	var track = arguments[2]
 	var type = arguments[1]
 	_sound_system.play_audio(track, type)
-
-func _on_end() -> void:
-	get_tree().quit()
 
 # TODO: Move the save and load functions up to Main, and signal for them from Director.
 #func _save_requested() -> void:
