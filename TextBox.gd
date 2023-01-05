@@ -39,6 +39,10 @@ func _ready() -> void:
 # warning-ignore:return_value_discarded
 	_choice_selector.connect("choice_made", self, "_on_ChoiceSelector_choice_made")
 	
+	# All inputs should get caught by the ButtonBar, which will send this signal.
+# warning-ignore:return_value_discarded
+	_button_bar.connect("option_chosen", self, "_on_option_chosen")
+	
 	# We connect to the `time_ticked` signal.
 # warning-ignore:return_value_discarded
 #	_skip_button.connect("timer_ticked", self, "_on_SkipButton_timer_ticked")
@@ -103,11 +107,11 @@ func _on_Tween_tween_all_completed() -> void:
 	# Once all the text is visible, show the arrow to indicate we can move to the next line.
 	_blinking_arrow.show()
 
-func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("next"):
+func _on_option_chosen(option) -> void:
+	if option == "next":
 		advance_dialogue()
 
-# Either complete the current line or show the next dialogue line.
+# Either complete the current line or show the next one
 func advance_dialogue() -> void:
 	if _blinking_arrow.visible:
 		emit_signal("next_requested")

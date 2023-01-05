@@ -16,24 +16,36 @@ func display_options() -> void:
 		button.text = option.capitalize()
 		add_child(button)
 # warning-ignore:return_value_discarded
-		button.connect("pressed", self, "_on_Button_pressed", [option])
+		button.connect("button_down", self, "_on_Button_down", [option])
+		button.connect("button_up", self, "_on_Button_up", [option])
 
-func _on_Button_pressed(option) -> void:
+func _input(event: InputEvent) -> void:
+	# This is how we process inputs. I've set "save" in the InputMap to be triggered by the "s" key, and `_on_Button_down` now converts pressing the "save" button into the same input, and so on, so all inputs (button or key) should end up here.
+	for option in options:
+		if event.is_action_pressed(option):
+			print("The option pressed is ", option)
+			emit_signal("option_chosen", option)
+		elif event.is_action_released(option):
+			print("The option released is ", option)
+	# Release focus from the buttons.
+	for child in get_children():
+		if child is Button:
+			child.release_focus()
+
+# TODO: Implement the SkipButton code here, so we'll have a child timer and spam the "next" signal to keep the text advancing as long as it's held down. Add `_start_skipping` and `stop_skipping` functions.
+			
+func _on_Button_down(option) -> void:
 	# Here's the code we need to convert a button press into an `InputEvent`, which will then be handled in the `_input` function if we've defined and named appropriate inputs in the InputMap settings.
 	var a = InputEventAction.new()
 	a.action = option
 	a.pressed = true
 	Input.parse_input_event(a)
 	
-	# Release focus from the buttons.
-	for child in get_children():
-		if child is Button:
-			child.release_focus()
-	print("Option number ", options.find(option), " called ", option, ", or capitalized ", option.capitalize(), " chosen.")
+func _on_Button_up(option) -> void:
+	# Same as for _on_Button_down, but we're tracking button releases so we can process the "Skip" option properly.
+	var a = InputEventAction.new()
+	a.action = option
+	a.pressed = false
+	Input.parse_input_event(a)
 
-func _input(event: InputEvent) -> void:
-	# This is how we process inputs. I've set "save" in the InputMap to be triggered by the "s" key, and `_on_Button_pressed` now converts pressing the "save" button into the same input, and so on, so all inputs (button or key) should end up here.
-	for option in options:
-		if event.is_action_pressed(option):
-			print("The option pressed is ", option)
-			emit_signal("option_chosen", option)
+

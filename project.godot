@@ -123,6 +123,10 @@ skip={
  ]
 }
 
+[mono]
+
+project/assembly_name="writing-for-godot"
+
 [physics]
 
 common/enable_pause_aware_picking=true
