@@ -23,7 +23,6 @@ onready var _blinking_arrow: Control = $TextLabel/BlinkingArrow
 onready var _tween: Tween = $Tween
 onready var _anim_player: AnimationPlayer = $AnimationPlayer
 onready var _button_bar: HBoxContainer = $ButtonBar
-#onready var _skip_button : Button = $ButtonBar/SkipButton
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

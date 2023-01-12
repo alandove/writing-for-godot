@@ -7,6 +7,7 @@ onready var _character_displayer := $CharacterDisplayer
 onready var _background := $Background
 onready var _anim_player: AnimationPlayer = $FadeAnimationPlayer
 onready var _sound_system := $SoundSystem
+onready var _button_bar : HBoxContainer = $TextBox/ButtonBar
 
 # TODO: Move the save and load functions up to Main, and signal for them from Director.
 #onready var _save_button : Button = $TextBox/SaveButton
@@ -26,6 +27,8 @@ func _ready() -> void:
 	story.connect("InkChoices", self, "_on_choices")
 # warning-ignore:return_value_discarded
 	story.connect("InkEnded", self, "_on_end")
+# warning-ignore:return_value_discarded
+	_button_bar.connect("option_chosen", self, "_on_option_chosen")
 	
 	# TODO: Move save and load functions up to Main, and signal for them from Director.
 # warning-ignore:return_value_discarded
@@ -39,20 +42,45 @@ func _ready() -> void:
 func start_story() -> void:
 	# Show the initial background - the textbox will show up on its own.
 	_background.show()
+	_character_displayer.show()
+	_button_bar.show()
 	# Start the story.
 	story.Continue()
 
+func stop_story() -> void:
+	_background.hide()
+	_textbox.hide()
+	_character_displayer.hide()
+	_button_bar.hide()
+	
 func load_game() -> void:
-	# TODO: Build a function that reads the Ink state from a file, sets up the appropriate knot and and characters, then calls `start_story`.
+	# TODO: Build a function that reads the Ink state from a file, sets up the appropriate knot and and characters, then calls `start_story`. Or move the save and load functions up to Main and signal for them from Director.
 	pass
 
+# Previous save and load functions.
+#func _save_requested() -> void:
+#	var file = File.new()
+#	file.open("save.json", File.WRITE)
+#	story.SaveStateOnDisk("user://save.json")
+#	file.close()
+
+#func _load_requested() -> void:
+#	var file = File.new()
+#	file.open("save.json", File.READ)
+#	story.LoadStateFromDisk("user://save.json")
+#	file.close()
+
+
+func _on_option_chosen(option) -> void:
+	pass
+	
 func _on_story_continued(text, tags) -> void:
 #	_load_requested()
 #	print("The loaded story state in JSON format is ", story.GetState())
 
 	print(text)
 	print(tags)
-	# TODO: The tag parsing system is all in here right now, but the functions it calls probably belong in a separate script.
+	# The tag parsing system is all in here currently.
 	# Strategy: "# function_name argument_1 argument_2 etc" in the Ink file gets parsed into the function name and arguments, then we call(function_name(arguments: Array).
 	
 	# First, we split each tag into its space-delimited elements.
@@ -126,7 +154,7 @@ func show(arguments) -> void:
 	var animation: String = arguments[3]
 	var side: String = arguments[4]
 	
-	# TODO: Add some code here to store the new character information in the Ink file, so we can reload everyone properly from a save file. I may need to store a dictionary of characters shown in the Ink.
+	# TODO: Add some code here to store the new character information in the Ink file, so we can reload everyone properly from a save file. I may need to store a dictionary of the characters currently being shown on screen, and store that variable in the Ink.
 	
 	# Now let's put it all together and ship it out to the CharacterDisplayer.
 	_character_displayer.display(character, expression, animation, side)
@@ -138,17 +166,3 @@ func audio(arguments) -> void:
 	var track = arguments[2]
 	var type = arguments[1]
 	_sound_system.play_audio(track, type)
-
-# TODO: Move the save and load functions up to Main, and signal for them from Director.
-#func _save_requested() -> void:
-#	var file = File.new()
-#	file.open("save.json", File.WRITE)
-#	story.SaveStateOnDisk("user://save.json")
-#	file.close()
-
-#func _load_requested() -> void:
-#	var file = File.new()
-#	file.open("save.json", File.READ)
-#	story.LoadStateFromDisk("user://save.json")
-#	file.close()
-
