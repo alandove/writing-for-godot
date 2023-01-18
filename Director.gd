@@ -7,7 +7,10 @@ onready var _character_displayer := $CharacterDisplayer
 onready var _background := $Background
 onready var _anim_player: AnimationPlayer = $FadeAnimationPlayer
 onready var _sound_system := $SoundSystem
+# Button bar for the main game controls.
 onready var _button_bar : HBoxContainer = $TextBox/ButtonBar
+# Pop-up dialog to confirm when a player wants to exit to the main screen.
+onready var _exit_confirmation : AcceptDialog = $ExitConfirmation
 
 # TODO: Move the save and load functions up to Main, and signal for them from Director.
 #onready var _save_button : Button = $TextBox/SaveButton
@@ -20,6 +23,9 @@ var character_name: String
 ## Emitted when a transition, such as a fade in or fade out of the whole scene, ends. This lets the node wait for its animations to finish before triggering other events.
 signal transition_finished
 
+# Emitted when the player requests an exit, save, or load.
+signal exit_requested
+
 func _ready() -> void:
 	# warning-ignore:return_value_discarded
 	story.connect("InkContinued", self, "_on_story_continued")
@@ -29,6 +35,9 @@ func _ready() -> void:
 	story.connect("InkEnded", self, "_on_end")
 # warning-ignore:return_value_discarded
 	_button_bar.connect("option_chosen", self, "_on_option_chosen")
+# warning-ignore:return_value_discarded
+	_exit_confirmation.connect("confirmed", self, "_on_exit_confirmed")
+	_exit_confirmation.get_cancel().connect("pressed", self, "_on_exit_cancelled")
 	
 	# TODO: Move save and load functions up to Main, and signal for them from Director.
 # warning-ignore:return_value_discarded
@@ -72,7 +81,19 @@ func load_game() -> void:
 
 
 func _on_option_chosen(option) -> void:
-	pass
+	if option == "exit":
+		_exit_confirmation.show()
+		_exit_confirmation.grab_focus()
+		get_tree().paused = true
+		# TODO: Fix this so keyboard controls go to the `ExitConfirmation`.
+
+func _on_exit_cancelled() -> void:
+	_exit_confirmation.release_focus()
+	_exit_confirmation.hide()
+	get_tree().paused = false
+	
+func _on_exit_confirmed() -> void:
+	emit_signal("exit_requested", "exit")
 	
 func _on_story_continued(text, tags) -> void:
 #	_load_requested()
@@ -154,7 +175,7 @@ func show(arguments) -> void:
 	var animation: String = arguments[3]
 	var side: String = arguments[4]
 	
-	# TODO: Add some code here to store the new character information in the Ink file, so we can reload everyone properly from a save file. I may need to store a dictionary of the characters currently being shown on screen, and store that variable in the Ink.
+	# TODO: Add some code here to store the new character information in the Ink file, so we can reload everyone properly from a save file. I may need to create a dictionary of the characters currently being shown on screen, and store that variable in the Ink.
 	
 	# Now let's put it all together and ship it out to the CharacterDisplayer.
 	_character_displayer.display(character, expression, animation, side)

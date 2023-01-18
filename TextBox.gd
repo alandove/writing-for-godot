@@ -120,8 +120,9 @@ func advance_dialogue() -> void:
 # warning-ignore:return_value_discarded
 		_tween.seek(INF)
 
-func _on_SkipButton_timer_ticked() -> void:
-	advance_dialogue()
+# Moved the skip timer to `ButtonBar`.
+#func _on_SkipButton_timer_ticked() -> void:
+#	advance_dialogue()
 
 # Fade animations for the text box, set up as coroutines with yield().
 func fade_in_async() -> void:

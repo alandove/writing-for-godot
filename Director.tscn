@@ -365,3 +365,16 @@ anims/fade_out = SubResource( 5 )
 anims/setup = SubResource( 6 )
 
 [node name="SoundSystem" parent="." instance=ExtResource( 14 )]
+
+[node name="ExitConfirmation" type="ConfirmationDialog" parent="."]
+pause_mode = 2
+margin_left = 415.0
+margin_top = 268.0
+margin_right = 615.0
+margin_bottom = 383.0
+focus_next = NodePath(".")
+focus_mode = 2
+theme = ExtResource( 7 )
+window_title = "Exit?"
+dialog_text = "Quit to the main menu?"
+dialog_autowrap = true
