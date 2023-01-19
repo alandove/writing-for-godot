@@ -45,6 +45,7 @@ func _input(event: InputEvent) -> void:
 			if option == "skip":
 				_timer.stop()
 	# Release focus from the buttons.
+	# TODO: This probably goes one indentation up, in the `is_action_released` block. 
 	for child in get_children():
 		if child is Button:
 			child.release_focus()

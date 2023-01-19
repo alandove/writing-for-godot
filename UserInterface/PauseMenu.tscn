@@ -4,6 +4,7 @@
 [ext_resource path="res://UserInterface/PauseButtons.gd" type="Script" id=2]
 
 [node name="PauseMenu" type="TextureRect"]
+pause_mode = 2
 self_modulate = Color( 1, 1, 1, 0.501961 )
 anchor_right = 1.0
 anchor_bottom = 1.0

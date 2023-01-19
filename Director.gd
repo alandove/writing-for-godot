@@ -10,7 +10,7 @@ onready var _sound_system := $SoundSystem
 # Button bar for the main game controls.
 onready var _button_bar : HBoxContainer = $TextBox/ButtonBar
 # Pop-up dialog to confirm when a player wants to exit to the main screen.
-onready var _pause_menu : VBoxContainer = $PauseMenu
+onready var _pause_menu : TextureRect = $PauseMenu
 
 # TODO: Move the save and load functions up to Main, and signal for them from Director.
 #onready var _save_button : Button = $TextBox/SaveButton
@@ -47,6 +47,7 @@ func _ready() -> void:
 	# Start with visible parts hidden, so the title screen can come up.
 	_textbox.hide()
 	_background.hide()
+	_pause_menu.hide()
 	
 func start_story() -> void:
 	# Show the initial background - the textbox will show up on its own.
@@ -83,7 +84,7 @@ func load_game() -> void:
 func _on_option_chosen(option) -> void:
 	if option == "exit":
 		_pause_menu.show()
-		_pause_menu.grab_focus()
+#		_pause_menu.grab_focus()
 		get_tree().paused = true
 		# TODO: Fix this so keyboard controls go to the `ExitConfirmation`.
 
