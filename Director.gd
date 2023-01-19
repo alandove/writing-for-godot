@@ -10,7 +10,7 @@ onready var _sound_system := $SoundSystem
 # Button bar for the main game controls.
 onready var _button_bar : HBoxContainer = $TextBox/ButtonBar
 # Pop-up dialog to confirm when a player wants to exit to the main screen.
-onready var _exit_confirmation : AcceptDialog = $ExitConfirmation
+onready var _pause_menu : VBoxContainer = $PauseMenu
 
 # TODO: Move the save and load functions up to Main, and signal for them from Director.
 #onready var _save_button : Button = $TextBox/SaveButton
@@ -36,8 +36,8 @@ func _ready() -> void:
 # warning-ignore:return_value_discarded
 	_button_bar.connect("option_chosen", self, "_on_option_chosen")
 # warning-ignore:return_value_discarded
-	_exit_confirmation.connect("confirmed", self, "_on_exit_confirmed")
-	_exit_confirmation.get_cancel().connect("pressed", self, "_on_exit_cancelled")
+#	_pause_menu.connect("confirmed", self, "_on_exit_confirmed")
+#	_pause_menu.get_cancel().connect("pressed", self, "_on_exit_cancelled")
 	
 	# TODO: Move save and load functions up to Main, and signal for them from Director.
 # warning-ignore:return_value_discarded
@@ -82,14 +82,14 @@ func load_game() -> void:
 
 func _on_option_chosen(option) -> void:
 	if option == "exit":
-		_exit_confirmation.show()
-		_exit_confirmation.grab_focus()
+		_pause_menu.show()
+		_pause_menu.grab_focus()
 		get_tree().paused = true
 		# TODO: Fix this so keyboard controls go to the `ExitConfirmation`.
 
 func _on_exit_cancelled() -> void:
-	_exit_confirmation.release_focus()
-	_exit_confirmation.hide()
+	_pause_menu.release_focus()
+	_pause_menu.hide()
 	get_tree().paused = false
 	
 func _on_exit_confirmed() -> void:
