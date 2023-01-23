@@ -42,6 +42,8 @@ func _ready() -> void:
 # warning-ignore:return_value_discarded
 	_button_bar.connect("option_chosen", self, "_on_option_chosen")
 	
+	_button_bar.show()
+	
 	# We connect to the `time_ticked` signal.
 # warning-ignore:return_value_discarded
 #	_skip_button.connect("timer_ticked", self, "_on_SkipButton_timer_ticked")

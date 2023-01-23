@@ -7,10 +7,6 @@ onready var _character_displayer := $CharacterDisplayer
 onready var _background := $Background
 onready var _anim_player: AnimationPlayer = $FadeAnimationPlayer
 onready var _sound_system := $SoundSystem
-# Button bar for the main game controls.
-onready var _button_bar : HBoxContainer = $TextBox/ButtonBar
-# Pop-up dialog to confirm when a player wants to exit to the main screen.
-onready var _pause_menu : TextureRect = $PauseMenu
 
 # TODO: Move the save and load functions up to Main, and signal for them from Director.
 #onready var _save_button : Button = $TextBox/SaveButton
@@ -33,8 +29,7 @@ func _ready() -> void:
 	story.connect("InkChoices", self, "_on_choices")
 # warning-ignore:return_value_discarded
 	story.connect("InkEnded", self, "_on_end")
-# warning-ignore:return_value_discarded
-	_button_bar.connect("option_chosen", self, "_on_option_chosen")
+
 # warning-ignore:return_value_discarded
 #	_pause_menu.connect("confirmed", self, "_on_exit_confirmed")
 #	_pause_menu.get_cancel().connect("pressed", self, "_on_exit_cancelled")
@@ -47,13 +42,12 @@ func _ready() -> void:
 	# Start with visible parts hidden, so the title screen can come up.
 	_textbox.hide()
 	_background.hide()
-	_pause_menu.hide()
 	
 func start_story() -> void:
 	# Show the initial background - the textbox will show up on its own.
 	_background.show()
 	_character_displayer.show()
-	_button_bar.show()
+#	_button_bar.show()
 	# Start the story.
 	story.Continue()
 
@@ -61,7 +55,7 @@ func stop_story() -> void:
 	_background.hide()
 	_textbox.hide()
 	_character_displayer.hide()
-	_button_bar.hide()
+#	_button_bar.hide()
 	
 func load_game() -> void:
 	# TODO: Build a function that reads the Ink state from a file, sets up the appropriate knot and and characters, then calls `start_story`. Or move the save and load functions up to Main and signal for them from Director.
@@ -79,22 +73,6 @@ func load_game() -> void:
 #	file.open("save.json", File.READ)
 #	story.LoadStateFromDisk("user://save.json")
 #	file.close()
-
-
-func _on_option_chosen(option) -> void:
-	if option == "exit":
-		_pause_menu.show()
-#		_pause_menu.grab_focus()
-		get_tree().paused = true
-		# TODO: Fix this so keyboard controls go to the `ExitConfirmation`.
-
-func _on_exit_cancelled() -> void:
-	_pause_menu.release_focus()
-	_pause_menu.hide()
-	get_tree().paused = false
-	
-func _on_exit_confirmed() -> void:
-	emit_signal("exit_requested", "exit")
 	
 func _on_story_continued(text, tags) -> void:
 #	_load_requested()

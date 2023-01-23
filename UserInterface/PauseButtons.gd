@@ -1,6 +1,6 @@
 extends VBoxContainer
 
-var options: Array = ["save", "load", "exit", "cancel"]
+export var options: Array = ["save", "load", "exit", "cancel"]
 
 signal pause_option_chosen(target_id)
 
@@ -15,6 +15,7 @@ func _ready():
 		option_index = options.find(option, 0)
 		add_child(button)
 		button.set_focus_mode(Control.FOCUS_ALL)
+# warning-ignore:return_value_discarded
 		button.connect("pressed", self, "_on_Button_pressed", [option_index])
 
 func _input(event: InputEvent) -> void:

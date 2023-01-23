@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://Director.gd" type="Script" id=1]
 [ext_resource path="res://ink-files/MainStory.ink" type="Resource" id=2]
@@ -12,7 +12,6 @@
 [ext_resource path="res://Backgrounds/industrial_building.jpg" type="Texture" id=10]
 [ext_resource path="res://ChoiceSelector.tscn" type="PackedScene" id=11]
 [ext_resource path="res://FadingControl.gd" type="Script" id=12]
-[ext_resource path="res://UserInterface/PauseMenu.tscn" type="PackedScene" id=13]
 [ext_resource path="res://SoundSystem.tscn" type="PackedScene" id=14]
 [ext_resource path="res://ButtonBar.gd" type="Script" id=15]
 
@@ -366,5 +365,3 @@ anims/fade_out = SubResource( 5 )
 anims/setup = SubResource( 6 )
 
 [node name="SoundSystem" parent="." instance=ExtResource( 14 )]
-
-[node name="PauseMenu" parent="." instance=ExtResource( 13 )]
