@@ -7,6 +7,9 @@ onready var director = $Director
 # Pop-up dialog to confirm when a player wants to exit to the main screen.
 onready var _pause_menu : TextureRect = $PauseMenu
 onready var _pause_buttons : VBoxContainer = $PauseMenu/PauseButtons
+# Get the options from the pause buttons.
+onready var pause_options : Array = _pause_buttons.options
+
 # Button bar for the main game controls.
 onready var _button_bar : HBoxContainer = $Director/TextBox/ButtonBar
 
@@ -22,8 +25,9 @@ func _ready() -> void:
 	# warning-ignore:return_value_discarded
 	_button_bar.connect("option_chosen", self, "_on_option_chosen")
 	
+# warning-ignore:return_value_discarded
 	_pause_buttons.connect("pause_option_chosen", self, "_pause_option_chosen")
-
+	
 func _on_MainMenu_start_button_pressed() -> void:
 	get_tree().paused = false
 	title_screen.hide()
@@ -39,12 +43,17 @@ func _on_option_chosen(option) -> void:
 		# TODO: Fix this so keyboard controls go to the `ExitConfirmation`.
 
 func _pause_option_chosen(option) -> void:
-	print("Pause option ", option, " received by Main.")
+	match pause_options[option]:
+		"quit":
+			get_tree().quit()
+		"cancel":
+			get_tree().paused = false
+			director.start_story()
 	
-func _on_exit_cancelled() -> void:
-	_pause_menu.release_focus()
-	_pause_menu.hide()
-	get_tree().paused = false
-	
-func _on_exit_confirmed() -> void:
-	emit_signal("exit_requested", "exit")
+#func _on_exit_cancelled() -> void:
+#	_pause_menu.release_focus()
+#	_pause_menu.hide()
+#	get_tree().paused = false
+#
+#func _on_exit_confirmed() -> void:
+#	emit_signal("exit_requested", "exit")

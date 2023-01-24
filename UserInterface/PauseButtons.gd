@@ -1,6 +1,6 @@
 extends VBoxContainer
 
-export var options: Array = ["save", "load", "exit", "cancel"]
+export var options: Array = ["save", "load", "quit", "cancel"]
 
 signal pause_option_chosen(target_id)
 
@@ -11,7 +11,7 @@ func _ready():
 	for option in options:
 		var option_index := 0
 		var button := Button.new()
-		button.text = option
+		button.text = option.capitalize()
 		option_index = options.find(option, 0)
 		add_child(button)
 		button.set_focus_mode(Control.FOCUS_ALL)

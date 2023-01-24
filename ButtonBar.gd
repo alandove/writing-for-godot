@@ -63,5 +63,3 @@ func _on_Button_up(option) -> void:
 	a.action = option
 	a.pressed = false
 	Input.parse_input_event(a)
-
-

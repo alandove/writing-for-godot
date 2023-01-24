@@ -20,7 +20,7 @@ var character_name: String
 signal transition_finished
 
 # Emitted when the player requests an exit, save, or load.
-signal exit_requested
+# signal exit_requested
 
 func _ready() -> void:
 	# warning-ignore:return_value_discarded
