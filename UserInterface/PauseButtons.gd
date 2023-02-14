@@ -27,8 +27,6 @@ func _input(event: InputEvent) -> void:
 func _on_Button_pressed(target_id) -> void:
 	print("The PauseButtons are sending the signal 'pause_option' with the argument ", target_id)
 	emit_signal("pause_option_chosen", target_id)
-	for child in get_children():
-		child.queue_free()
 
 # Code pasted from `ChoiceSelector` for reference here, since we can't have split screen in the Godot editor.
 #func display(choices: Array) -> void:
